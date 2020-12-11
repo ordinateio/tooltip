@@ -230,7 +230,7 @@
 }
 
 .tooltip-box[data-theme] {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 
 .tooltip-content {

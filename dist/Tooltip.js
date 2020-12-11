@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const tippy_js_1 = require("tippy.js");
 const lexicon_1 = require("@modstrap/lexicon");
+const tippy_js_1 = require("tippy.js");
 /**
  * Adaptation for Tippy.js.
  *

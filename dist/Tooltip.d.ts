@@ -1,28 +1,91 @@
-import { Instance as TooltipInstance, Props as TippyProps, ReferenceElement } from "tippy.js";
-interface Target extends ReferenceElement {
+import { Instance, Props, ReferenceElement } from 'tippy.js';
+interface TooltipTarget extends ReferenceElement {
     dataset?: DOMStringMap;
 }
-interface BaseProperties extends TippyProps {
+interface TooltipInstance extends Instance {
+    reference: TooltipTarget;
+}
+interface TooltipProperties extends Props {
     theme: Theme;
     placement: Placement;
+    animation: Animation;
     class: string;
-    onAfterUpdate(instance: TooltipInstance, properties: Partial<BaseProperties>): void;
-    onBeforeUpdate(instance: TooltipInstance, properties: Partial<BaseProperties>): void;
+    /**
+     * Lifecycle hook invoked after the tooltip's properties have been updated.
+     *
+     * @param instance
+     * @param properties
+     */
+    onAfterUpdate(instance: TooltipInstance, properties: Partial<TooltipProperties>): void;
+    /**
+     * Lifecycle hook invoked before the tooltip's properties have been updated.
+     *
+     * @param instance
+     * @param properties
+     */
+    onBeforeUpdate(instance: TooltipInstance, properties: Partial<TooltipProperties>): void;
+    /**
+     * Lifecycle hook invoked when the tooltip has has been created.
+     *
+     * @param instance
+     */
     onCreate(instance: TooltipInstance): void;
+    /**
+     * Lifecycle hook invoked when the tooltip has has been destroyed.
+     *
+     * @param instance
+     */
     onDestroy(instance: TooltipInstance): void;
+    /**
+     * Lifecycle hook invoked when the tooltip has fully transitioned out and is unmounted from the DOM.
+     *
+     * @param instance
+     */
     onHidden(instance: TooltipInstance): void;
-    onHide(instance: TooltipInstance): void | false;
+    /**
+     * Lifecycle hook invoked when the tooltip begins to transition out.
+     *
+     * @param instance
+     */
+    onHide(instance: TooltipInstance): void;
+    /**
+     * Lifecycle hook invoked when the tooltip has been mounted to the DOM.
+     *
+     * @param instance
+     */
     onMount(instance: TooltipInstance): void;
-    onShow(instance: TooltipInstance): void | false;
+    /**
+     * Lifecycle hook invoked when the tooltip begins to transition in.
+     *
+     * @param instance
+     */
+    onShow(instance: TooltipInstance): void;
+    /**
+     * Lifecycle hook invoked when the tooltip has fully transitioned in.
+     *
+     * @param instance
+     */
     onShown(instance: TooltipInstance): void;
+    /**
+     * Lifecycle hook invoked when the tooltip was triggered by a real DOM event (called before onShow) to show the tooltip.
+     *
+     * @param instance
+     * @param event
+     */
     onTrigger(instance: TooltipInstance, event: Event): void;
+    /**
+     * Lifecycle hook invoked when the tooltip was triggered by a real DOM event (called before onHide) to hide the tooltip.
+     *
+     * @param instance
+     * @param event
+     */
     onUntrigger(instance: TooltipInstance, event: Event): void;
-    onClickOutside(instance: TooltipInstance, event: Event): void;
 }
 declare type Theme = 'dark' | 'light';
 declare type Placement = "top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end" | "auto" | "auto-start" | "auto-end";
-declare type SetProperties = Partial<BaseProperties> & {
-    trigger?: Trigger;
+declare type Animation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
+declare type TooltipSetProperties = Partial<TooltipProperties> & {
+    trigger: Trigger;
     target: string;
 };
 declare type Trigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focusin' | 'click' | 'manual';
@@ -50,13 +113,13 @@ declare class Tooltip {
      *
      * @param properties Properties.
      */
-    static set(properties: SetProperties): void;
+    static set(properties: TooltipSetProperties): void;
     /**
      * Returns an existing instance, otherwise returns undefined.
      *
      * @param target Target item.
      */
-    static getInstance(target: Target): TooltipInstance | undefined;
+    static getInstance(target: TooltipTarget): TooltipInstance | undefined;
     /**
      * Sets properties for an instance.
      *
@@ -81,4 +144,4 @@ declare class Tooltip {
     private static getData;
 }
 export default Tooltip;
-export { TooltipInstance, BaseProperties, };
+export { TooltipInstance, TooltipProperties, };
