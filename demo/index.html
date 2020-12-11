@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Tooltip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<article>
+    <div class="content">
+        <div class="nav-container">
+            <div class="nav-button"
+                 data-tooltip-content="selector:.nav"
+                 data-tooltip-class="tooltip-nav"
+                 data-tooltip-theme="light"
+                 data-tooltip-placement="bottom"
+                 data-tooltip-interactive="true"
+                 data-tooltip-animation="shift-away">Nav
+            </div>
+            <div class="nav">
+                <ul>
+                    <li><a href="/" title="">First item</a></li>
+                    <li><a href="/" title="">Second item</a></li>
+                    <li><a href="/" title="">Third item</a></li>
+                    <li><a href="/" title="">Fourth item</a></li>
+                    <li><a href="/" title="">Fifth item</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="placement">
+            <div class="item button"
+                 data-tooltip-content="Top-Start!"
+                 data-tooltip-placement="top-start">Top-Start
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Top!"
+                 data-tooltip-placement="top">Top
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Top-End!"
+                 data-tooltip-placement="top-end">Top-End
+            </div>
+
+            <div class="item button"
+                 data-tooltip-content="Right-Start!"
+                 data-tooltip-placement="right-start">Right-Start
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Right!"
+                 data-tooltip-placement="right">Right
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Right-End!"
+                 data-tooltip-placement="right-end">Right-End
+            </div>
+
+            <div class="item button"
+                 data-tooltip-content="Bottom-Start!"
+                 data-tooltip-placement="bottom-start">Bottom-Start
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Bottom!"
+                 data-tooltip-placement="bottom">Bottom
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Bottom-End!"
+                 data-tooltip-placement="bottom-end">Bottom-End
+            </div>
+
+            <div class="item button"
+                 data-tooltip-content="Left-Start!"
+                 data-tooltip-placement="left-start">Left-Start
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Left!"
+                 data-tooltip-placement="left">Left
+            </div>
+            <div class="item button"
+                 data-tooltip-content="Left-End!"
+                 data-tooltip-placement="left-end">Left-End
+            </div>
+        </div>
+
+        <div class="other">
+            <div class="item button click"
+                 data-tooltip-content="Click!"
+                 data-tooltip-interactive="true"
+                 data-tooltip-class="custom-class">Click
+            </div>
+            <div class="item button mouseenter"
+                 data-tooltip-content="Mouseenter!">Mouseenter
+            </div>
+            <div class="item button focus">
+                <!--suppress HtmlFormInputWithoutLabel -->
+                <input type="text"
+                       data-tooltip-content="Focus!"
+                       placeholder="Focus">
+            </div>
+            <div class="item toggle-lang button"
+                 data-value="en"
+                 data-tooltip-content="lexicon:test"
+                 data-tooltip-interactive="true">"en"
+            </div>
+            <div class="item toggle-lang button"
+                 data-value="ru"
+                 data-tooltip-content="lexicon:test"
+                 data-tooltip-interactive="true">"ru"
+            </div>
+            <div class="item button mouseenter"
+                 data-tooltip-content="Follow!"
+                 data-tooltip-theme="light"
+                 data-tooltip-follow-cursor="true">Follow
+            </div>
+        </div>
+
+    </div>
+</article>
+<script async src="dist/bundle.js"></script>
+</body>
+</html>
