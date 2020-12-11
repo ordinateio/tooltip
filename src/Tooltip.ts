@@ -112,11 +112,11 @@ interface HTMLAttributes {
 type Theme = 'dark' | 'light';
 
 type Placement =
-    | "top" | "top-start" | "top-end"
-    | "right" | "right-start" | "right-end"
-    | "bottom" | "bottom-start" | "bottom-end"
-    | "left" | "left-start" | "left-end"
-    | "auto" | "auto-start" | "auto-end";
+    | 'top' | 'top-start' | 'top-end'
+    | 'right' | 'right-start' | 'right-end'
+    | 'bottom' | 'bottom-start' | 'bottom-end'
+    | 'left' | 'left-start' | 'left-end'
+    | 'auto' | 'auto-start' | 'auto-end';
 
 type Animation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
 
@@ -241,7 +241,7 @@ class Tooltip {
     }
 
     /**
-     * Retrieves attributes prefixed with "tooltip" and converts them to properties.
+     * Retrieves attributes prefixed with 'tooltip' and converts them to properties.
      *
      * @param target Target item.
      * @private
