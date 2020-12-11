@@ -82,7 +82,7 @@ interface TooltipProperties extends Props {
     onUntrigger(instance: TooltipInstance, event: Event): void;
 }
 declare type Theme = 'dark' | 'light';
-declare type Placement = "top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end" | "auto" | "auto-start" | "auto-end";
+declare type Placement = 'top' | 'top-start' | 'top-end' | 'right' | 'right-start' | 'right-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'auto' | 'auto-start' | 'auto-end';
 declare type Animation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
 declare type TooltipSetProperties = Partial<TooltipProperties> & {
     trigger: Trigger;
@@ -136,7 +136,7 @@ declare class Tooltip {
      */
     private static getProperties;
     /**
-     * Retrieves attributes prefixed with "tooltip" and converts them to properties.
+     * Retrieves attributes prefixed with 'tooltip' and converts them to properties.
      *
      * @param target Target item.
      * @private

@@ -96,7 +96,7 @@ class Tooltip {
         return data;
     }
     /**
-     * Retrieves attributes prefixed with "tooltip" and converts them to properties.
+     * Retrieves attributes prefixed with 'tooltip' and converts them to properties.
      *
      * @param target Target item.
      * @private
