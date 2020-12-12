@@ -103,7 +103,7 @@ interface TooltipProperties extends Props {
     onUntrigger(instance: TooltipInstance, event: Event): void;
 }
 
-interface HTMLAttributes {
+interface DataAttributes {
     content: string;
 
     [property: string]: string;
@@ -120,7 +120,7 @@ type Placement =
 
 type Animation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
 
-type TooltipSetProperties = Partial<TooltipProperties> & {
+type SetProperties = Partial<TooltipProperties> & {
     trigger: Trigger;
     target: string;
 }
@@ -172,7 +172,7 @@ class Tooltip {
      *
      * @param properties Properties.
      */
-    static set(properties: TooltipSetProperties): void {
+    static set(properties: SetProperties): void {
         this.init();
 
         delegate('body', {
@@ -246,9 +246,9 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getData(target: TooltipTarget): HTMLAttributes {
+    private static getData(target: TooltipTarget): DataAttributes {
         const dataset: DOMStringMap = target.dataset ?? {};
-        const data: HTMLAttributes = {
+        const data: DataAttributes = {
             content: 'Content is missing!'
         };
 

@@ -84,7 +84,7 @@ interface TooltipProperties extends Props {
 declare type Theme = 'dark' | 'light';
 declare type Placement = 'top' | 'top-start' | 'top-end' | 'right' | 'right-start' | 'right-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'auto' | 'auto-start' | 'auto-end';
 declare type Animation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
-declare type TooltipSetProperties = Partial<TooltipProperties> & {
+declare type SetProperties = Partial<TooltipProperties> & {
     trigger: Trigger;
     target: string;
 };
@@ -113,7 +113,7 @@ declare class Tooltip {
      *
      * @param properties Properties.
      */
-    static set(properties: TooltipSetProperties): void;
+    static set(properties: SetProperties): void;
     /**
      * Returns an existing instance, otherwise returns undefined.
      *
