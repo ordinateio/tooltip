@@ -1,12 +1,12 @@
 import Lexicon from '@modstrap/lexicon';
-import Tippy, {delegate, followCursor, Instance, Props, ReferenceElement} from 'tippy.js';
+import Tippy, {delegate, followCursor, Instance as TippyInstance, Props, ReferenceElement} from 'tippy.js';
 
-interface TooltipTarget extends ReferenceElement {
+interface Target extends ReferenceElement {
     dataset?: DOMStringMap;
 }
 
-interface TooltipInstance extends Instance {
-    reference: TooltipTarget;
+interface TooltipInstance extends TippyInstance {
+    reference: Target;
 }
 
 interface TooltipProperties extends Props {
@@ -103,7 +103,7 @@ interface TooltipProperties extends Props {
     onUntrigger(instance: TooltipInstance, event: Event): void;
 }
 
-interface DataAttributes {
+interface Data {
     content: string;
 
     [property: string]: string;
@@ -189,7 +189,7 @@ class Tooltip {
      *
      * @param target Target item.
      */
-    static getInstance(target: TooltipTarget): TooltipInstance | undefined {
+    static getInstance(target: Target): TooltipInstance | undefined {
         return target._tippy;
     }
 
@@ -224,7 +224,7 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getProperties(target: TooltipTarget): Partial<TooltipProperties> {
+    private static getProperties(target: Target): Partial<TooltipProperties> {
         const data = this.getData(target);
 
         if (data.content.startsWith('selector:')) {
@@ -246,9 +246,9 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getData(target: TooltipTarget): DataAttributes {
+    private static getData(target: Target): Data {
         const dataset: DOMStringMap = target.dataset ?? {};
-        const data: DataAttributes = {
+        const data: Data = {
             content: 'Content is missing!'
         };
 
