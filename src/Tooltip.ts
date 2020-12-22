@@ -38,14 +38,14 @@ interface TooltipProperties extends Props {
     ): void;
 
     /**
-     * Lifecycle hook invoked when the tooltip has has been created.
+     * Lifecycle hook invoked when the tooltip has been created.
      *
      * @param instance
      */
     onCreate(instance: TooltipInstance): void;
 
     /**
-     * Lifecycle hook invoked when the tooltip has has been destroyed.
+     * Lifecycle hook invoked when the tooltip has been destroyed.
      *
      * @param instance
      */
