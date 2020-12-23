@@ -6,13 +6,13 @@
     "incremental": true,
     "tsBuildInfoFile": "./.cache/tsconfig.tsbuildinfo",
     "sourceMap": false,
-    "target": "ES2019",
+    "target": "ES6",
     "strict": true,
     "removeComments": false,
     "declaration": true,
-    "outDir": "dist/"
+    "outDir": "./dist",
   },
-  "files": [
-    "src/Tooltip.ts"
-  ]
+  "include": [
+    "./src/**/*",
+  ],
 }
