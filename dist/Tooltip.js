@@ -60,13 +60,10 @@ class Tooltip {
      */
     static set(properties) {
         this.init();
-        tippy_js_1.delegate('body', {
-            ...properties,
-            ...{
-                onShow: this.setProperties.bind(this, properties.onShow),
-                touch: (properties.trigger === 'click') ? 'hold' : true,
-            }
-        });
+        tippy_js_1.delegate('body', Object.assign(Object.assign({}, properties), {
+            onShow: this.setProperties.bind(this, properties.onShow),
+            touch: (properties.trigger === 'click') ? 'hold' : true,
+        }));
     }
     /**
      * Returns an existing instance, otherwise returns undefined.
