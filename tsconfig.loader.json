@@ -7,5 +7,6 @@
     "sourceMap": true,
     "target": "ES6",
     "strict": true,
+    "noEmitOnError": true,
   }
 }
