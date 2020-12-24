@@ -1,12 +1,12 @@
 import Lexicon from '@modstrap/lexicon';
 import Tippy, {delegate, followCursor, Instance as TippyInstance, Props, ReferenceElement} from 'tippy.js';
 
-interface Target extends ReferenceElement {
+interface TargetElement extends ReferenceElement {
     dataset?: DOMStringMap;
 }
 
 interface TooltipInstance extends TippyInstance {
-    reference: Target;
+    reference: TargetElement;
 }
 
 interface TooltipProperties extends Props {
@@ -189,7 +189,7 @@ class Tooltip {
      *
      * @param target Target item.
      */
-    static getInstance(target: Target): TooltipInstance | undefined {
+    static getInstance(target: TargetElement): TooltipInstance | undefined {
         return target._tippy;
     }
 
@@ -224,7 +224,7 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getProperties(target: Target): Partial<TooltipProperties> {
+    private static getProperties(target: TargetElement): Partial<TooltipProperties> {
         const data = this.getData(target);
 
         if (data.content.startsWith('selector:')) {
@@ -246,7 +246,7 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getData(target: Target): Data {
+    private static getData(target: TargetElement): Data {
         const dataset: DOMStringMap = target.dataset ?? {};
         const data: Data = {
             content: 'Content is missing!'

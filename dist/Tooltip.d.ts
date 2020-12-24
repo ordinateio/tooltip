@@ -1,9 +1,9 @@
 import { Instance as TippyInstance, Props, ReferenceElement } from 'tippy.js';
-interface Target extends ReferenceElement {
+interface TargetElement extends ReferenceElement {
     dataset?: DOMStringMap;
 }
 interface TooltipInstance extends TippyInstance {
-    reference: Target;
+    reference: TargetElement;
 }
 interface TooltipProperties extends Props {
     theme: Theme;
@@ -119,7 +119,7 @@ declare class Tooltip {
      *
      * @param target Target item.
      */
-    static getInstance(target: Target): TooltipInstance | undefined;
+    static getInstance(target: TargetElement): TooltipInstance | undefined;
     /**
      * Sets properties for an instance.
      *
