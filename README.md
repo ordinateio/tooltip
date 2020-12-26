@@ -16,10 +16,12 @@ npm i https://github.com/callisto2410/modstrap-tooltip.git
 
 ## Usage
 
+SCSS
 ```scss
 @use '~@modstrap/tooltip';
 ```
 
+TypeScript
 ```ts
 import Tooltip from "@modstrap/tooltip";
 
