@@ -90,9 +90,8 @@ class Tooltip {
         (_a = popper.querySelector('.tippy-box')) === null || _a === void 0 ? void 0 : _a.classList.add('tooltip-box');
         (_b = popper.querySelector('.tippy-arrow')) === null || _b === void 0 ? void 0 : _b.classList.add('tooltip-arrow');
         (_c = popper.querySelector('.tippy-content')) === null || _c === void 0 ? void 0 : _c.classList.add('tooltip-content');
-        if (properties.class) {
+        if (properties.class)
             popper.classList.add(...properties.class.split(' '));
-        }
         instance.setProps(properties);
     }
     /**
