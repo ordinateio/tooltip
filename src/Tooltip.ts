@@ -1,12 +1,12 @@
 import Lexicon from '@modstrap/lexicon';
 import Tippy, {delegate, followCursor, Instance as TippyInstance, Props, ReferenceElement} from 'tippy.js';
 
-interface TargetElement extends ReferenceElement {
+interface TooltipTarget extends ReferenceElement {
     dataset?: DOMStringMap;
 }
 
 interface TooltipInstance extends TippyInstance {
-    reference: TargetElement;
+    reference: TooltipTarget;
 }
 
 interface TooltipProperties extends Props {
@@ -189,7 +189,7 @@ class Tooltip {
      *
      * @param target Target item.
      */
-    static getInstance(target: TargetElement): TooltipInstance | undefined {
+    static getInstance(target: TooltipTarget): TooltipInstance | undefined {
         return target._tippy;
     }
 
@@ -211,9 +211,7 @@ class Tooltip {
         popper.querySelector('.tippy-arrow')?.classList.add('tooltip-arrow');
         popper.querySelector('.tippy-content')?.classList.add('tooltip-content');
 
-        if (properties.class) {
-            popper.classList.add(...properties.class.split(' '));
-        }
+        if (properties.class) popper.classList.add(...properties.class.split(' '));
 
         instance.setProps(properties);
     }
@@ -224,7 +222,7 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getProperties(target: TargetElement): Partial<TooltipProperties> {
+    private static getProperties(target: TooltipTarget): Partial<TooltipProperties> {
         const data = this.getData(target);
 
         if (data.content.startsWith('selector:')) {
@@ -246,7 +244,7 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getData(target: TargetElement): Data {
+    private static getData(target: TooltipTarget): Data {
         const dataset: DOMStringMap = target.dataset ?? {};
         const data: Data = {
             content: 'Content is missing!'
@@ -266,6 +264,7 @@ class Tooltip {
 
 export default Tooltip;
 export {
+    TooltipTarget,
     TooltipInstance,
     TooltipProperties,
 }
