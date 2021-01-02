@@ -5,7 +5,7 @@ interface TooltipTarget extends ReferenceElement {
 interface TooltipInstance extends TippyInstance {
     reference: TooltipTarget;
 }
-interface TooltipProperties extends Props {
+interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
     theme: Theme;
     placement: Placement;
     animation: Animation;

@@ -9,7 +9,7 @@ interface TooltipInstance extends TippyInstance {
     reference: TooltipTarget;
 }
 
-interface TooltipProperties extends Props {
+interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
     theme: Theme;
     placement: Placement;
     animation: Animation;
@@ -21,10 +21,7 @@ interface TooltipProperties extends Props {
      * @param instance
      * @param properties
      */
-    onAfterUpdate(
-        instance: TooltipInstance,
-        properties: Partial<TooltipProperties>
-    ): void;
+    onAfterUpdate(instance: TooltipInstance, properties: Partial<TooltipProperties>): void;
 
     /**
      * Lifecycle hook invoked before the tooltip's properties have been updated.
@@ -32,10 +29,7 @@ interface TooltipProperties extends Props {
      * @param instance
      * @param properties
      */
-    onBeforeUpdate(
-        instance: TooltipInstance,
-        properties: Partial<TooltipProperties>
-    ): void;
+    onBeforeUpdate(instance: TooltipInstance, properties: Partial<TooltipProperties>): void;
 
     /**
      * Lifecycle hook invoked when the tooltip has been created.
