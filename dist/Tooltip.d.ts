@@ -6,9 +6,9 @@ interface TooltipInstance extends TippyInstance {
     reference: TooltipTarget;
 }
 interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
-    theme: Theme;
-    placement: Placement;
-    animation: Animation;
+    theme: TooltipTheme;
+    placement: TooltipPlacement;
+    animation: TooltipAnimation;
     class: string;
     /**
      * Lifecycle hook invoked after the tooltip's properties have been updated.
@@ -81,14 +81,14 @@ interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
      */
     onUntrigger(instance: TooltipInstance, event: Event): void;
 }
-declare type Theme = 'dark' | 'light';
-declare type Placement = 'top' | 'top-start' | 'top-end' | 'right' | 'right-start' | 'right-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'auto' | 'auto-start' | 'auto-end';
-declare type Animation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
-declare type SetProperties = Partial<TooltipProperties> & {
-    trigger: Trigger;
+declare type TooltipTheme = 'dark' | 'light';
+declare type TooltipPlacement = 'top' | 'top-start' | 'top-end' | 'right' | 'right-start' | 'right-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'auto' | 'auto-start' | 'auto-end';
+declare type TooltipAnimation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
+declare type TooltipSetProperties = Partial<TooltipProperties> & {
+    trigger: TooltipTrigger;
     target: string;
 };
-declare type Trigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focusin' | 'click' | 'manual';
+declare type TooltipTrigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focusin' | 'click' | 'manual';
 /**
  * Adaptation for Tippy.js.
  *
@@ -113,7 +113,7 @@ declare class Tooltip {
      *
      * @param properties Properties.
      */
-    static set(properties: SetProperties): void;
+    static set(properties: TooltipSetProperties): void;
     /**
      * Returns an existing instance, otherwise returns undefined.
      *

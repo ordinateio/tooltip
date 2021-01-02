@@ -10,9 +10,9 @@ interface TooltipInstance extends TippyInstance {
 }
 
 interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
-    theme: Theme;
-    placement: Placement;
-    animation: Animation;
+    theme: TooltipTheme;
+    placement: TooltipPlacement;
+    animation: TooltipAnimation;
     class: string;
 
     /**
@@ -97,31 +97,31 @@ interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
     onUntrigger(instance: TooltipInstance, event: Event): void;
 }
 
-interface Data {
+interface TooltipData {
     content: string;
 
     [property: string]: string;
 }
 
-type Theme = 'dark' | 'light';
+type TooltipTheme = 'dark' | 'light';
 
-type Placement =
+type TooltipPlacement =
     | 'top' | 'top-start' | 'top-end'
     | 'right' | 'right-start' | 'right-end'
     | 'bottom' | 'bottom-start' | 'bottom-end'
     | 'left' | 'left-start' | 'left-end'
     | 'auto' | 'auto-start' | 'auto-end';
 
-type Animation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
+type TooltipAnimation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
 
-type SetProperties = Partial<TooltipProperties> & {
-    trigger: Trigger;
+type TooltipSetProperties = Partial<TooltipProperties> & {
+    trigger: TooltipTrigger;
     target: string;
 }
 
-type Trigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focusin' | 'click' | 'manual';
+type TooltipTrigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focusin' | 'click' | 'manual';
 
-type OnShow = ((instance: TooltipInstance) => void) | undefined;
+type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
 
 /**
  * Adaptation for Tippy.js.
@@ -166,7 +166,7 @@ class Tooltip {
      *
      * @param properties Properties.
      */
-    static set(properties: SetProperties): void {
+    static set(properties: TooltipSetProperties): void {
         this.init();
 
         delegate('body', {
@@ -194,7 +194,7 @@ class Tooltip {
      * @param instance
      * @private
      */
-    private static setProperties(onShow: OnShow, instance: TooltipInstance): void {
+    private static setProperties(onShow: TooltipOnShow, instance: TooltipInstance): void {
         if (onShow) onShow(instance);
 
         const properties = this.getProperties(instance.reference);
@@ -238,9 +238,9 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getData(target: TooltipTarget): Data {
+    private static getData(target: TooltipTarget): TooltipData {
         const dataset: DOMStringMap = target.dataset ?? {};
-        const data: Data = {
+        const data: TooltipData = {
             content: 'Content is missing!'
         };
 
