@@ -1,84 +1,81 @@
-import Lexicon from '@modstrap/lexicon';
-import Tippy, {delegate, followCursor, Instance as TippyInstance, Props, ReferenceElement} from 'tippy.js';
+import Lexicon from "@modstrap/lexicon";
+import Tippy, {delegate, followCursor, Instance as TippyInstance, ReferenceElement} from "tippy.js";
 
-interface TooltipTarget extends ReferenceElement {
-    dataset?: DOMStringMap;
-}
-
-interface TooltipInstance extends TippyInstance {
-    reference: TooltipTarget;
-}
-
-interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
+export interface TooltipProperties {
+    content: string;
+    class: string;
     theme: TooltipTheme;
     placement: TooltipPlacement;
     animation: TooltipAnimation;
-    class: string;
+    interactive: boolean;
+    followCursor: boolean;
+}
 
+export interface TooltipCallbacks {
     /**
-     * Lifecycle hook invoked after the tooltip's properties have been updated.
+     * Lifecycle hook invoked after the tooltip properties have been updated.
      *
      * @param instance
      * @param properties
      */
-    onAfterUpdate(instance: TooltipInstance, properties: Partial<TooltipProperties>): void;
+    onAfterUpdate?(instance: TooltipInstance, properties: Partial<TooltipCallbacks>): void;
 
     /**
-     * Lifecycle hook invoked before the tooltip's properties have been updated.
+     * Lifecycle hook invoked before the tooltip properties have been updated.
      *
      * @param instance
      * @param properties
      */
-    onBeforeUpdate(instance: TooltipInstance, properties: Partial<TooltipProperties>): void;
+    onBeforeUpdate?(instance: TooltipInstance, properties: Partial<TooltipCallbacks>): void;
 
     /**
      * Lifecycle hook invoked when the tooltip has been created.
      *
      * @param instance
      */
-    onCreate(instance: TooltipInstance): void;
+    onCreate?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip has been destroyed.
      *
      * @param instance
      */
-    onDestroy(instance: TooltipInstance): void;
+    onDestroy?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip has fully transitioned out and is unmounted from the DOM.
      *
      * @param instance
      */
-    onHidden(instance: TooltipInstance): void;
+    onHidden?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip begins to transition out.
      *
      * @param instance
      */
-    onHide(instance: TooltipInstance): void;
+    onHide?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip has been mounted to the DOM.
      *
      * @param instance
      */
-    onMount(instance: TooltipInstance): void;
+    onMount?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip begins to transition in.
      *
      * @param instance
      */
-    onShow(instance: TooltipInstance): void;
+    onShow?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip has fully transitioned in.
      *
      * @param instance
      */
-    onShown(instance: TooltipInstance): void;
+    onShown?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip was triggered by a real DOM event (called before onShow) to show the tooltip.
@@ -86,7 +83,7 @@ interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
      * @param instance
      * @param event
      */
-    onTrigger(instance: TooltipInstance, event: Event): void;
+    onTrigger?(instance: TooltipInstance, event: Event): void;
 
     /**
      * Lifecycle hook invoked when the tooltip was triggered by a real DOM event (called before onHide) to hide the tooltip.
@@ -94,42 +91,41 @@ interface TooltipProperties extends Omit<Props, 'onClickOutside'> {
      * @param instance
      * @param event
      */
-    onUntrigger(instance: TooltipInstance, event: Event): void;
+    onUntrigger?(instance: TooltipInstance, event: Event): void;
 }
 
-interface TooltipData {
-    content: string;
-
-    [property: string]: string;
-}
-
-type TooltipTheme = 'dark' | 'light';
-
-type TooltipPlacement =
-    | 'top' | 'top-start' | 'top-end'
-    | 'right' | 'right-start' | 'right-end'
-    | 'bottom' | 'bottom-start' | 'bottom-end'
-    | 'left' | 'left-start' | 'left-end'
-    | 'auto' | 'auto-start' | 'auto-end';
-
-type TooltipAnimation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
-
-type TooltipSetProperties = Partial<TooltipProperties> & {
+export interface TooltipSetProperties extends TooltipCallbacks {
     trigger: TooltipTrigger;
     target: string;
 }
 
-type TooltipTrigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focusin' | 'click' | 'manual';
+export interface TooltipTarget extends ReferenceElement {
+    dataset?: DOMStringMap;
+}
 
-type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
+export interface TooltipInstance extends TippyInstance {
+    reference: TooltipTarget;
+}
+
+export type TooltipTheme = "dark" | "light";
+
+export type TooltipPlacement =
+    | "top" | "top-start" | "top-end"
+    | "right" | "right-start" | "right-end"
+    | "bottom" | "bottom-start" | "bottom-end"
+    | "left" | "left-start" | "left-end"
+    | "auto" | "auto-start" | "auto-end";
+
+export type TooltipAnimation = "scale" | "shift-away" | "shift-toward" | "perspective";
+
+export type TooltipTrigger = "mouseenter" | "focus" | "mouseenter focus" | "focusin" | "click" | "manual";
+
+export type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
 
 /**
- * Adaptation for Tippy.js.
- *
- * @see set
- * @see getInstance
+ * Helper class for initial Tippy.js setup.
  */
-class Tooltip {
+class Init {
     /**
      * Reconfiguration prevention indicator.
      *
@@ -138,42 +134,48 @@ class Tooltip {
     private static initiated: boolean = false;
 
     /**
-     * Setting up.
-     *
-     * @private
+     * Basic setup.
      */
-    private static init(): void {
+    public static main(): void {
         if (this.initiated) return;
 
         Tippy.setDefaultProps({
-            animation: 'scale',
+            animation: "scale",
             allowHTML: true,
             inertia: true,
             arrow: true,
             ignoreAttributes: true,
             zIndex: 99_999,
             maxWidth: 300,
-            theme: 'dark',
+            theme: "dark",
             offset: [0, 6],
-            plugins: [followCursor],
+            plugins: [followCursor]
         });
 
         this.initiated = true;
     }
+}
 
+Init.main();
+
+/**
+ * Adaptation for Tippy.js.
+ *
+ * @see set
+ * @see getInstance
+ */
+export class Tooltip {
     /**
      * Sets the tooltip handler to the target element.
      *
      * @param properties Properties.
      */
-    static set(properties: TooltipSetProperties): void {
-        this.init();
-
-        delegate('body', {
+    public static set(properties: TooltipSetProperties): void {
+        delegate("body", {
             ...properties,
             ...{
                 onShow: this.setProperties.bind(this, properties.onShow),
-                touch: (properties.trigger === 'click') ? 'hold' : true,
+                touch: (properties.trigger === "click") ? "hold" : true,
             }
         });
     }
@@ -183,7 +185,7 @@ class Tooltip {
      *
      * @param target Target item.
      */
-    static getInstance(target: TooltipTarget): TooltipInstance | undefined {
+    public static getInstance(target: TooltipTarget): TooltipInstance | undefined {
         return target._tippy;
     }
 
@@ -195,17 +197,16 @@ class Tooltip {
      * @private
      */
     private static setProperties(onShow: TooltipOnShow, instance: TooltipInstance): void {
-        if (onShow) onShow(instance);
+        (onShow) && onShow(instance);
 
         const properties = this.getProperties(instance.reference);
         const popper = instance.popper;
 
-        popper.classList.add('tooltip-root');
-        popper.querySelector('.tippy-box')?.classList.add('tooltip-box');
-        popper.querySelector('.tippy-arrow')?.classList.add('tooltip-arrow');
-        popper.querySelector('.tippy-content')?.classList.add('tooltip-content');
-
-        if (properties.class) popper.classList.add(...properties.class.split(' '));
+        popper.classList.add("tooltip-root");
+        popper.querySelector(".tippy-box")?.classList.add("tooltip-box");
+        popper.querySelector(".tippy-arrow")?.classList.add("tooltip-arrow");
+        popper.querySelector(".tippy-content")?.classList.add("tooltip-content");
+        (properties.class) && popper.classList.add(...properties.class.split(" "));
 
         instance.setProps(properties);
     }
@@ -216,16 +217,16 @@ class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getProperties(target: TooltipTarget): Partial<TooltipProperties> {
+    private static getProperties(target: TooltipTarget): TooltipProperties {
         const data = this.getData(target);
 
-        if (data.content.startsWith('selector:')) {
-            const selector = data.content.replace('selector:', '').trim();
+        if (data.content.startsWith("selector:")) {
+            const selector = data.content.replace("selector:", "").trim();
             data.content = document.querySelector(selector)?.outerHTML ?? data.content;
         }
 
-        if (data.content.startsWith('lexicon:')) {
-            const lexicon = data.content.replace('lexicon:', '').trim();
+        if (data.content.startsWith("lexicon:")) {
+            const lexicon = data.content.replace("lexicon:", "").trim();
             data.content = Lexicon.get(lexicon);
         }
 
@@ -233,32 +234,24 @@ class Tooltip {
     }
 
     /**
-     * Retrieves attributes prefixed with 'tooltip' and converts them to properties.
+     * Returns the properties derived from the attributes.
      *
      * @param target Target item.
      * @private
      */
-    private static getData(target: TooltipTarget): TooltipData {
-        const dataset: DOMStringMap = target.dataset ?? {};
-        const data: TooltipData = {
-            content: 'Content is missing!'
-        };
+    private static getData(target: TooltipTarget): TooltipProperties {
+        const dataset = target.dataset ?? {};
 
-        for (const [key, value] of Object.entries(dataset)) {
-            if (!key.startsWith('tooltip')) continue;
-            if (value === undefined) continue;
-
-            const property = key.replace(/^tooltip./, (prefix) => prefix.slice(-1).toLowerCase());
-            data[property] = value;
+        return {
+            content: dataset.tooltipContent ?? "Content is missing!",
+            theme: dataset.tooltipTheme as TooltipTheme ?? "dark",
+            placement: dataset.tooltipPlacement as TooltipPlacement ?? "top",
+            animation: dataset.tooltipAnimation as TooltipAnimation ?? "scale",
+            interactive: dataset.tooltipInteractive === "true",
+            followCursor: dataset.tooltipFollowCursor === "true",
+            class: dataset.tooltipClass ?? "",
         }
-
-        return data;
     }
 }
 
 export default Tooltip;
-export {
-    TooltipTarget,
-    TooltipInstance,
-    TooltipProperties,
-}

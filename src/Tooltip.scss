@@ -1,16 +1,16 @@
-@use '../node_modules/tippy.js/dist/tippy.css';
-@use '../node_modules/tippy.js/themes/light.css';
-@use '../node_modules/tippy.js/animations/scale.css';
-@use '../node_modules/tippy.js/animations/shift-away.css';
-@use '../node_modules/tippy.js/animations/shift-toward.css';
-@use '../node_modules/tippy.js/animations/perspective.css';
+@use "../node_modules/tippy.js/dist/tippy.css";
+@use "../node_modules/tippy.js/themes/light.css";
+@use "../node_modules/tippy.js/animations/scale.css";
+@use "../node_modules/tippy.js/animations/shift-away.css";
+@use "../node_modules/tippy.js/animations/shift-toward.css";
+@use "../node_modules/tippy.js/animations/perspective.css";
 
 .tooltip-box[data-theme] {
   box-shadow: 0 0 15px rgba(#000, .15);
 }
 
 .tooltip-content {
-  font: 13px 'Arial';
+  font: 13px "Arial";
   padding: 8px 15px;
 }
 
