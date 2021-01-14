@@ -66,7 +66,7 @@ WP.module = {
 }
 
 WP.resolve = {
-    extensions: [".ts", ".js", ".scss"],
+    extensions: [".ts", ".js"],
 }
 
 module.exports = WP;
