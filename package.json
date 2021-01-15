@@ -17,9 +17,11 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.json && npx sass --no-source-map src/Tooltip.scss dist/Tooltip.css",
-    "build:all": "npm run build:clean && npm run build && npm run build:demo",
-    "build:demo": "webpack --config webpack.config.js",
-    "build:demo:watch": "webpack --watch --config webpack.config.js",
+    "build:all": "npm run build:clean && npm run build && npm run build:demo:production",
+    "build:demo:production": "webpack -d source-map --mode production -c webpack.config.js",
+    "build:demo:production:watch": "webpack --watch -d source-map --mode production -c webpack.config.js",
+    "build:demo:development": "webpack -d eval --mode development -c webpack.config.js",
+    "build:demo:development:watch": "webpack --watch -d eval --mode development -c webpack.config.js",
     "build:clean": "npx rimraf .cache dist demo/dist *.tgz",
     "build:pack": "npm run build:clean && npm run build && npm pack"
   },
@@ -27,6 +29,7 @@
     "@types/node": "^14.14.20",
     "autoprefixer": "^10.2.1",
     "css-loader": "^5.0.1",
+    "cssnano": "^4.1.10",
     "postcss-loader": "^4.0.1",
     "rimraf": "^3.0.2",
     "sass": "^1.32.4",
