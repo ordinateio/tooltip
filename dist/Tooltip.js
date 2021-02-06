@@ -62,6 +62,9 @@ Init.main();
  *
  * @see set
  * @see getInstance
+ *
+ * Tooltip:
+ * [Github]{@link https://github.com/callisto2410/modstrap-tooltip}
  */
 class Tooltip {
     /**

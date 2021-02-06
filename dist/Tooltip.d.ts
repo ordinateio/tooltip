@@ -100,6 +100,9 @@ export declare type TooltipOnShow = ((instance: TooltipInstance) => void) | unde
  *
  * @see set
  * @see getInstance
+ *
+ * Tooltip:
+ * [Github]{@link https://github.com/callisto2410/modstrap-tooltip}
  */
 export declare class Tooltip {
     /**
