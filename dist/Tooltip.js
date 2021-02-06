@@ -65,6 +65,10 @@ Init.main();
  *
  * Tooltip:
  * [Github]{@link https://github.com/callisto2410/modstrap-tooltip}
+ *
+ * Tippy.js:
+ * [Github]{@link https://github.com/atomiks/tippyjs}
+ * [Homepage]{@link https://atomiks.github.io/tippyjs/}
  */
 class Tooltip {
     /**
@@ -87,7 +91,75 @@ class Tooltip {
      * @param target Target item.
      */
     static getInstance(target) {
+        if (typeof target === "string") {
+            const selector = document.querySelector(target);
+            return selector ? selector._tippy : undefined;
+        }
         return target._tippy;
+    }
+    /**
+     * Destroy the tooltip.
+     *
+     * @param target
+     */
+    static destroy(target) {
+        const instance = this.getInstance(target);
+        instance && instance.destroy();
+    }
+    /**
+     * Disable the tooltip.
+     *
+     * @param target
+     */
+    static disable(target) {
+        const instance = this.getInstance(target);
+        instance && instance.disable();
+    }
+    /**
+     * Enable the tooltip.
+     *
+     * @param target
+     */
+    static enable(target) {
+        const instance = this.getInstance(target);
+        instance && instance.enable();
+    }
+    /**
+     * Set the content for the tooltip.
+     *
+     * @param target
+     * @param content
+     */
+    static setContent(target, content) {
+        const instance = this.getInstance(target);
+        instance && instance.setContent(content);
+    }
+    /**
+     * Hide the tooltip.
+     *
+     * @param target
+     */
+    static hide(target) {
+        const instance = this.getInstance(target);
+        instance && instance.hide();
+    }
+    /**
+     * Show the tooltip.
+     *
+     * @param target
+     */
+    static show(target) {
+        const instance = this.getInstance(target);
+        instance && instance.show();
+    }
+    /**
+     * Unmount the tooltip from the DOM.
+     *
+     * @param target
+     */
+    static unmount(target) {
+        const instance = this.getInstance(target);
+        instance && instance.unmount();
     }
     /**
      * Sets properties for an instance.

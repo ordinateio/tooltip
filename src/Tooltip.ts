@@ -107,6 +107,8 @@ export interface TooltipInstance extends TippyInstance {
     reference: TooltipTarget;
 }
 
+export type TooltipSelector = HTMLElement | string;
+
 export type TooltipTheme = "dark" | "light";
 
 export type TooltipPlacement =
@@ -166,6 +168,10 @@ Init.main();
  *
  * Tooltip:
  * [Github]{@link https://github.com/callisto2410/modstrap-tooltip}
+ *
+ * Tippy.js:
+ * [Github]{@link https://github.com/atomiks/tippyjs}
+ * [Homepage]{@link https://atomiks.github.io/tippyjs/}
  */
 export class Tooltip {
     /**
@@ -188,8 +194,92 @@ export class Tooltip {
      *
      * @param target Target item.
      */
-    public static getInstance(target: TooltipTarget): TooltipInstance | undefined {
-        return target._tippy;
+    public static getInstance(target: TooltipSelector): TooltipInstance | undefined {
+        if (typeof target === "string") {
+            const selector = document.querySelector(target) as TooltipTarget | null;
+
+            return selector ? selector._tippy : undefined;
+        }
+
+        return (target as TooltipTarget)._tippy;
+    }
+
+    /**
+     * Destroy the tooltip.
+     *
+     * @param target
+     */
+    public static destroy(target: TooltipSelector): void {
+        const instance = this.getInstance(target);
+
+        instance && instance.destroy();
+    }
+
+    /**
+     * Disable the tooltip.
+     *
+     * @param target
+     */
+    public static disable(target: TooltipSelector): void {
+        const instance = this.getInstance(target);
+
+        instance && instance.disable();
+    }
+
+    /**
+     * Enable the tooltip.
+     *
+     * @param target
+     */
+    public static enable(target: TooltipSelector): void {
+        const instance = this.getInstance(target);
+
+        instance && instance.enable();
+    }
+
+    /**
+     * Set the content for the tooltip.
+     *
+     * @param target
+     * @param content
+     */
+    public static setContent(target: TooltipSelector, content: string): void {
+        const instance = this.getInstance(target);
+
+        instance && instance.setContent(content);
+    }
+
+    /**
+     * Hide the tooltip.
+     *
+     * @param target
+     */
+    public static hide(target: TooltipSelector): void {
+        const instance = this.getInstance(target);
+
+        instance && instance.hide();
+    }
+
+    /**
+     * Show the tooltip.
+     *
+     * @param target
+     */
+    public static show(target: TooltipSelector): void {
+        const instance = this.getInstance(target);
+
+        instance && instance.show();
+    }
+
+    /**
+     * Unmount the tooltip from the DOM.
+     *
+     * @param target
+     */
+    public static unmount(target: TooltipSelector): void {
+        const instance = this.getInstance(target);
+
+        instance && instance.unmount();
     }
 
     /**

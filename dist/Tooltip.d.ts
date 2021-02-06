@@ -90,6 +90,7 @@ export interface TooltipTarget extends ReferenceElement {
 export interface TooltipInstance extends TippyInstance {
     reference: TooltipTarget;
 }
+export declare type TooltipSelector = HTMLElement | string;
 export declare type TooltipTheme = "dark" | "light";
 export declare type TooltipPlacement = "top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end" | "auto" | "auto-start" | "auto-end";
 export declare type TooltipAnimation = "scale" | "shift-away" | "shift-toward" | "perspective";
@@ -103,6 +104,10 @@ export declare type TooltipOnShow = ((instance: TooltipInstance) => void) | unde
  *
  * Tooltip:
  * [Github]{@link https://github.com/callisto2410/modstrap-tooltip}
+ *
+ * Tippy.js:
+ * [Github]{@link https://github.com/atomiks/tippyjs}
+ * [Homepage]{@link https://atomiks.github.io/tippyjs/}
  */
 export declare class Tooltip {
     /**
@@ -116,7 +121,50 @@ export declare class Tooltip {
      *
      * @param target Target item.
      */
-    static getInstance(target: TooltipTarget): TooltipInstance | undefined;
+    static getInstance(target: TooltipSelector): TooltipInstance | undefined;
+    /**
+     * Destroy the tooltip.
+     *
+     * @param target
+     */
+    static destroy(target: TooltipSelector): void;
+    /**
+     * Disable the tooltip.
+     *
+     * @param target
+     */
+    static disable(target: TooltipSelector): void;
+    /**
+     * Enable the tooltip.
+     *
+     * @param target
+     */
+    static enable(target: TooltipSelector): void;
+    /**
+     * Set the content for the tooltip.
+     *
+     * @param target
+     * @param content
+     */
+    static setContent(target: TooltipSelector, content: string): void;
+    /**
+     * Hide the tooltip.
+     *
+     * @param target
+     */
+    static hide(target: TooltipSelector): void;
+    /**
+     * Show the tooltip.
+     *
+     * @param target
+     */
+    static show(target: TooltipSelector): void;
+    /**
+     * Unmount the tooltip from the DOM.
+     *
+     * @param target
+     */
+    static unmount(target: TooltipSelector): void;
     /**
      * Sets properties for an instance.
      *
