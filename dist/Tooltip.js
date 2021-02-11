@@ -62,6 +62,13 @@ Init.main();
  *
  * @see set
  * @see getInstance
+ * @see destroy
+ * @see disable
+ * @see enable
+ * @see setContent
+ * @see hide
+ * @see show
+ * @see unmount
  *
  * Tooltip:
  * [Github]{@link https://github.com/callisto2410/modstrap-tooltip}
