@@ -297,7 +297,7 @@ export class Tooltip {
      * @private
      */
     private static setProperties(onShow: TooltipOnShow, instance: TooltipInstance): void {
-        (onShow) && onShow(instance);
+        onShow && onShow(instance);
 
         const properties = this.getProperties(instance.reference);
         const popper = instance.popper;
@@ -306,7 +306,7 @@ export class Tooltip {
         popper.querySelector(".tippy-box")?.classList.add("tooltip-box");
         popper.querySelector(".tippy-arrow")?.classList.add("tooltip-arrow");
         popper.querySelector(".tippy-content")?.classList.add("tooltip-content");
-        (properties.class) && popper.classList.add(...properties.class.split(" "));
+        properties.class && popper.classList.add(...properties.class.split(" "));
 
         instance.setProps(properties);
     }
