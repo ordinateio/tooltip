@@ -107,8 +107,6 @@ export interface TooltipInstance extends TippyInstance {
     reference: TooltipTarget;
 }
 
-export type TooltipSelector = HTMLElement | string;
-
 export type TooltipTheme = "dark" | "light";
 
 export type TooltipPlacement =
@@ -199,25 +197,21 @@ export class Tooltip {
     /**
      * Returns an existing instance, otherwise returns undefined.
      *
-     * @param target Target item.
+     * @param selector
      */
-    public static getInstance(target: TooltipSelector): TooltipInstance | undefined {
-        if (typeof target === "string") {
-            const selector = document.querySelector(target) as TooltipTarget | null;
+    public static getInstance(selector: string): TooltipInstance | undefined {
+        const element = document.querySelector(selector) as TooltipTarget | null;
 
-            return selector ? selector._tippy : undefined;
-        }
-
-        return (target as TooltipTarget)._tippy;
+        return element ? element._tippy : undefined;
     }
 
     /**
      * Destroy the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    public static destroy(target: TooltipSelector): void {
-        const instance = this.getInstance(target);
+    public static destroy(selector: string): void {
+        const instance = this.getInstance(selector);
 
         instance && instance.destroy();
     }
@@ -225,10 +219,10 @@ export class Tooltip {
     /**
      * Disable the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    public static disable(target: TooltipSelector): void {
-        const instance = this.getInstance(target);
+    public static disable(selector: string): void {
+        const instance = this.getInstance(selector);
 
         instance && instance.disable();
     }
@@ -236,10 +230,10 @@ export class Tooltip {
     /**
      * Enable the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    public static enable(target: TooltipSelector): void {
-        const instance = this.getInstance(target);
+    public static enable(selector: string): void {
+        const instance = this.getInstance(selector);
 
         instance && instance.enable();
     }
@@ -247,11 +241,11 @@ export class Tooltip {
     /**
      * Set the content for the tooltip.
      *
-     * @param target
+     * @param selector
      * @param content
      */
-    public static setContent(target: TooltipSelector, content: string): void {
-        const instance = this.getInstance(target);
+    public static setContent(selector: string, content: string): void {
+        const instance = this.getInstance(selector);
 
         instance && instance.setContent(content);
     }
@@ -259,10 +253,10 @@ export class Tooltip {
     /**
      * Hide the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    public static hide(target: TooltipSelector): void {
-        const instance = this.getInstance(target);
+    public static hide(selector: string): void {
+        const instance = this.getInstance(selector);
 
         instance && instance.hide();
     }
@@ -270,10 +264,10 @@ export class Tooltip {
     /**
      * Show the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    public static show(target: TooltipSelector): void {
-        const instance = this.getInstance(target);
+    public static show(selector: string): void {
+        const instance = this.getInstance(selector);
 
         instance && instance.show();
     }
@@ -281,10 +275,10 @@ export class Tooltip {
     /**
      * Unmount the tooltip from the DOM.
      *
-     * @param target
+     * @param selector
      */
-    public static unmount(target: TooltipSelector): void {
-        const instance = this.getInstance(target);
+    public static unmount(selector: string): void {
+        const instance = this.getInstance(selector);
 
         instance && instance.unmount();
     }

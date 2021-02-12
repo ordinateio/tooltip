@@ -95,77 +95,74 @@ class Tooltip {
     /**
      * Returns an existing instance, otherwise returns undefined.
      *
-     * @param target Target item.
+     * @param selector
      */
-    static getInstance(target) {
-        if (typeof target === "string") {
-            const selector = document.querySelector(target);
-            return selector ? selector._tippy : undefined;
-        }
-        return target._tippy;
+    static getInstance(selector) {
+        const element = document.querySelector(selector);
+        return element ? element._tippy : undefined;
     }
     /**
      * Destroy the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    static destroy(target) {
-        const instance = this.getInstance(target);
+    static destroy(selector) {
+        const instance = this.getInstance(selector);
         instance && instance.destroy();
     }
     /**
      * Disable the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    static disable(target) {
-        const instance = this.getInstance(target);
+    static disable(selector) {
+        const instance = this.getInstance(selector);
         instance && instance.disable();
     }
     /**
      * Enable the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    static enable(target) {
-        const instance = this.getInstance(target);
+    static enable(selector) {
+        const instance = this.getInstance(selector);
         instance && instance.enable();
     }
     /**
      * Set the content for the tooltip.
      *
-     * @param target
+     * @param selector
      * @param content
      */
-    static setContent(target, content) {
-        const instance = this.getInstance(target);
+    static setContent(selector, content) {
+        const instance = this.getInstance(selector);
         instance && instance.setContent(content);
     }
     /**
      * Hide the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    static hide(target) {
-        const instance = this.getInstance(target);
+    static hide(selector) {
+        const instance = this.getInstance(selector);
         instance && instance.hide();
     }
     /**
      * Show the tooltip.
      *
-     * @param target
+     * @param selector
      */
-    static show(target) {
-        const instance = this.getInstance(target);
+    static show(selector) {
+        const instance = this.getInstance(selector);
         instance && instance.show();
     }
     /**
      * Unmount the tooltip from the DOM.
      *
-     * @param target
+     * @param selector
      */
-    static unmount(target) {
-        const instance = this.getInstance(target);
+    static unmount(selector) {
+        const instance = this.getInstance(selector);
         instance && instance.unmount();
     }
     /**
