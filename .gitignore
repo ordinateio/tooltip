@@ -1,7 +1,7 @@
 .idea
 .cache
 
-demo/dist
+dist
 node_modules
 
 *.tgz

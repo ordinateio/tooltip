@@ -1,5 +1,4 @@
 const Path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
 
 const WPack = {
     mode: "production",
@@ -7,10 +6,10 @@ const WPack = {
     performance: {
         hints: false,
     },
-    entry: Path.resolve(__dirname, "demo", "src", "index.ts"),
+    entry: Path.resolve(__dirname, "src/main.ts"),
     output: {
         filename: "[name].js",
-        path: Path.resolve(__dirname, "demo", "dist"),
+        path: Path.resolve(__dirname, "dist/assets"),
     },
     cache: {
         type: "filesystem",
@@ -20,23 +19,12 @@ const WPack = {
 
 WPack.optimization = {
     minimize: true,
-    minimizer: [
-        new TerserPlugin({
-            terserOptions: {
-                format: {
-                    comments: false,
-                },
-            },
-            extractComments: false,
-            parallel: true,
-        }),
-    ],
     splitChunks: {
         cacheGroups: {
             vendor: {
                 test: /[\\/]node_modules[\\/]/,
-                name: 'vendor',
-                chunks: 'all',
+                name: "vendor",
+                chunks: "all",
             },
         },
     },
@@ -45,14 +33,17 @@ WPack.optimization = {
 WPack.module = {
     rules: [
         {
-            test: /\.scss$/,
+            test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+            type: "asset",
+        },
+        {
+            test: /\.s?css$/,
             use: [
                 "style-loader",
                 {
                     loader: "css-loader",
                     options: {
                         sourceMap: false,
-                        url: false,
                     }
                 },
                 {
@@ -61,9 +52,7 @@ WPack.module = {
                         postcssOptions: {
                             plugins: {
                                 autoprefixer: {},
-                                cssnano: {
-                                    preset: ["default", {discardComments: {removeAll: true}}]
-                                },
+                                cssnano: {},
                             },
                         },
                     },
@@ -76,7 +65,7 @@ WPack.module = {
             use: [{
                 loader: "ts-loader",
                 options: {
-                    configFile: "tsconfig.loader.json",
+                    configFile: "tsconfig.json",
                 },
             }],
         },

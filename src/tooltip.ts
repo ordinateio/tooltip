@@ -1,4 +1,4 @@
-import Lexicon from "@modstrap/lexicon";
+import {Lexicon} from "@ordinateio/lexicon";
 import Tippy, {delegate, followCursor, Instance as TippyInstance, ReferenceElement} from "tippy.js";
 
 export interface TooltipProperties {
@@ -13,20 +13,20 @@ export interface TooltipProperties {
 
 export interface TooltipCallbacks {
     /**
-     * Lifecycle hook invoked after the tooltip properties have been updated.
-     *
-     * @param instance
-     * @param properties
-     */
-    onAfterUpdate?(instance: TooltipInstance, properties: Partial<TooltipCallbacks>): void;
-
-    /**
      * Lifecycle hook invoked before the tooltip properties have been updated.
      *
      * @param instance
      * @param properties
      */
     onBeforeUpdate?(instance: TooltipInstance, properties: Partial<TooltipCallbacks>): void;
+
+    /**
+     * Lifecycle hook invoked after the tooltip properties have been updated.
+     *
+     * @param instance
+     * @param properties
+     */
+    onAfterUpdate?(instance: TooltipInstance, properties: Partial<TooltipCallbacks>): void;
 
     /**
      * Lifecycle hook invoked when the tooltip has been created.
@@ -43,13 +43,6 @@ export interface TooltipCallbacks {
     onDestroy?(instance: TooltipInstance): void;
 
     /**
-     * Lifecycle hook invoked when the tooltip has fully transitioned out and is unmounted from the DOM.
-     *
-     * @param instance
-     */
-    onHidden?(instance: TooltipInstance): void;
-
-    /**
      * Lifecycle hook invoked when the tooltip begins to transition out.
      *
      * @param instance
@@ -57,11 +50,11 @@ export interface TooltipCallbacks {
     onHide?(instance: TooltipInstance): void;
 
     /**
-     * Lifecycle hook invoked when the tooltip has been mounted to the DOM.
+     * Lifecycle hook invoked when the tooltip has fully transitioned out and is unmounted from the DOM.
      *
      * @param instance
      */
-    onMount?(instance: TooltipInstance): void;
+    onHidden?(instance: TooltipInstance): void;
 
     /**
      * Lifecycle hook invoked when the tooltip begins to transition in.
@@ -78,20 +71,11 @@ export interface TooltipCallbacks {
     onShown?(instance: TooltipInstance): void;
 
     /**
-     * Lifecycle hook invoked when the tooltip was triggered by a real DOM event (called before onShow) to show the tooltip.
+     * Lifecycle hook invoked when the tooltip has been mounted to the DOM.
      *
      * @param instance
-     * @param event
      */
-    onTrigger?(instance: TooltipInstance, event: Event): void;
-
-    /**
-     * Lifecycle hook invoked when the tooltip was triggered by a real DOM event (called before onHide) to hide the tooltip.
-     *
-     * @param instance
-     * @param event
-     */
-    onUntrigger?(instance: TooltipInstance, event: Event): void;
+    onMount?(instance: TooltipInstance): void;
 }
 
 export interface TooltipSetProperties extends TooltipCallbacks {
@@ -136,7 +120,7 @@ class Init {
     /**
      * Basic setup.
      */
-    public static main(): void {
+    static main(): void {
         if (this.initiated) return;
 
         Tippy.setDefaultProps({
@@ -172,7 +156,7 @@ Init.main();
  * @see unmount
  *
  * Tooltip:
- * [Github]{@link https://github.com/callisto2410/modstrap-tooltip}
+ * [Github]{@link https://github.com/ordinateio/tooltip}
  *
  * Tippy.js:
  * [Github]{@link https://github.com/atomiks/tippyjs}
@@ -182,10 +166,11 @@ export class Tooltip {
     /**
      * Sets the tooltip handler to the target element.
      *
-     * @param properties Properties.
+     * @param selector A container selector for setting a delegate.
+     * @param properties
      */
-    public static set(properties: TooltipSetProperties): void {
-        delegate("body", {
+    static set(selector: string, properties: TooltipSetProperties): void {
+        delegate(selector, {
             ...properties,
             ...{
                 onShow: this.setProperties.bind(this, properties.onShow),
@@ -199,7 +184,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public static getInstance(selector: string): TooltipInstance | undefined {
+    static getInstance(selector: string): TooltipInstance | undefined {
         const element = document.querySelector(selector) as TooltipTarget | null;
 
         return element ? element._tippy : undefined;
@@ -210,7 +195,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public static destroy(selector: string): void {
+    static destroy(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.destroy();
@@ -221,7 +206,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public static disable(selector: string): void {
+    static disable(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.disable();
@@ -232,7 +217,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public static enable(selector: string): void {
+    static enable(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.enable();
@@ -244,7 +229,7 @@ export class Tooltip {
      * @param selector
      * @param content
      */
-    public static setContent(selector: string, content: string): void {
+    static setContent(selector: string, content: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.setContent(content);
@@ -255,7 +240,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public static hide(selector: string): void {
+    static hide(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.hide();
@@ -266,7 +251,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public static show(selector: string): void {
+    static show(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.show();
@@ -277,7 +262,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public static unmount(selector: string): void {
+    static unmount(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.unmount();
@@ -297,9 +282,9 @@ export class Tooltip {
         const popper = instance.popper;
 
         popper.classList.add("tooltip-root");
-        popper.querySelector(".tippy-box")?.classList.add("tooltip-box");
-        popper.querySelector(".tippy-arrow")?.classList.add("tooltip-arrow");
-        popper.querySelector(".tippy-content")?.classList.add("tooltip-content");
+        popper.querySelector(".tippy-box")?.classList.add("tooltip-container");
+        popper.querySelector(".tippy-arrow")?.classList.add("tooltip-container__arrow");
+        popper.querySelector(".tippy-content")?.classList.add("tooltip-container__content");
         properties.class && popper.classList.add(...properties.class.split(" "));
 
         instance.setProps(properties);
@@ -344,8 +329,6 @@ export class Tooltip {
             interactive: dataset.tooltipInteractive === "true",
             followCursor: dataset.tooltipFollowCursor === "true",
             class: dataset.tooltipClass ?? "",
-        }
+        };
     }
 }
-
-export default Tooltip;
