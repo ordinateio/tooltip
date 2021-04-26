@@ -33,7 +33,7 @@
     "npm:pack": "npm run build:clean && npm run build:dist && npm pack",
     "npm:publish": "npm publish --access public",
     "npm:reinstall": "npx rimraf node_modules && npm install",
-    "npm:lock:only": "npm install --package-lock-only"
+    "npm:install:lock": "npm install --package-lock-only"
   },
   "devDependencies": {
     "@types/node": "^14",
