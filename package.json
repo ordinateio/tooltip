@@ -24,8 +24,8 @@
     "typescript"
   ],
   "scripts": {
-    "build:dist": "npx tsc --project tsconfig.json && npx sass --no-source-map src/tooltip.scss dist/tooltip.css",
     "build:all": "npm run build:clean && npm run build:dist && npm run build:demo",
+    "build:dist": "npx tsc --project tsconfig.json && npx sass --no-source-map src/tooltip.scss dist/tooltip.css",
     "build:demo": "npx webpack --config demo/webpack.config.js",
     "build:demo:watch": "npx webpack --watch --config demo/webpack.config.js",
     "build:demo:server": "npx live-server ./demo",
