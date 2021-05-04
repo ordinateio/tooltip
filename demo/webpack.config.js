@@ -6,7 +6,7 @@ const WPack = {
     performance: {
         hints: false,
     },
-    entry: Path.resolve(__dirname, 'src/main.ts'),
+    entry: Path.resolve(__dirname, 'src/index.ts'),
     output: {
         filename: '[name].js',
         path: Path.resolve(__dirname, 'dist/assets'),

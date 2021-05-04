@@ -1,4 +1,4 @@
-import './main.scss';
+import './index.scss';
 
 import {Lexicon} from '@ordinateio/lexicon';
 import {Tooltip, TooltipInstance} from '../../src/Tooltip';
