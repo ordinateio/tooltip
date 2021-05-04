@@ -1,5 +1,5 @@
-import {Lexicon} from "@ordinateio/lexicon";
-import Tippy, {delegate, followCursor, Instance as TippyInstance, ReferenceElement} from "tippy.js";
+import {Lexicon} from '@ordinateio/lexicon';
+import Tippy, {delegate, followCursor, Instance as TippyInstance, ReferenceElement} from 'tippy.js';
 
 export interface TooltipProperties {
     content: string;
@@ -91,18 +91,18 @@ export interface TooltipInstance extends TippyInstance {
     reference: TooltipTarget;
 }
 
-export type TooltipTheme = "dark" | "light";
+export type TooltipTheme = 'dark' | 'light';
 
 export type TooltipPlacement =
-    | "top" | "top-start" | "top-end"
-    | "right" | "right-start" | "right-end"
-    | "bottom" | "bottom-start" | "bottom-end"
-    | "left" | "left-start" | "left-end"
-    | "auto" | "auto-start" | "auto-end";
+    | 'top' | 'top-start' | 'top-end'
+    | 'right' | 'right-start' | 'right-end'
+    | 'bottom' | 'bottom-start' | 'bottom-end'
+    | 'left' | 'left-start' | 'left-end'
+    | 'auto' | 'auto-start' | 'auto-end';
 
-export type TooltipAnimation = "scale" | "shift-away" | "shift-toward" | "perspective";
+export type TooltipAnimation = 'scale' | 'shift-away' | 'shift-toward' | 'perspective';
 
-export type TooltipTrigger = "mouseenter" | "focus" | "mouseenter focus" | "focusin" | "click" | "manual";
+export type TooltipTrigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focusin' | 'click' | 'manual';
 
 export type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
 
@@ -124,14 +124,14 @@ class Init {
         if (this.initiated) return;
 
         Tippy.setDefaultProps({
-            animation: "scale",
+            animation: 'scale',
             allowHTML: true,
             inertia: true,
             arrow: true,
             ignoreAttributes: true,
             zIndex: 99_999,
             maxWidth: 300,
-            theme: "dark",
+            theme: 'dark',
             offset: [0, 6],
             plugins: [followCursor]
         });
@@ -174,7 +174,7 @@ export class Tooltip {
             ...properties,
             ...{
                 onShow: this.setProperties.bind(this, properties.onShow),
-                touch: (properties.trigger === "click") ? "hold" : true,
+                touch: (properties.trigger === 'click') ? 'hold' : true,
             }
         });
     }
@@ -281,11 +281,11 @@ export class Tooltip {
         const properties = this.getProperties(instance.reference);
         const popper = instance.popper;
 
-        popper.classList.add("tooltip-root");
-        popper.querySelector(".tippy-box")?.classList.add("tooltip-container");
-        popper.querySelector(".tippy-arrow")?.classList.add("tooltip-container__arrow");
-        popper.querySelector(".tippy-content")?.classList.add("tooltip-container__content");
-        properties.class && popper.classList.add(...properties.class.split(" "));
+        popper.classList.add('tooltip-root');
+        popper.querySelector('.tippy-box')?.classList.add('tooltip-container');
+        popper.querySelector('.tippy-arrow')?.classList.add('tooltip-container__arrow');
+        popper.querySelector('.tippy-content')?.classList.add('tooltip-container__content');
+        properties.class && popper.classList.add(...properties.class.split(' '));
 
         instance.setProps(properties);
     }
@@ -299,13 +299,13 @@ export class Tooltip {
     private static getProperties(target: TooltipTarget): TooltipProperties {
         const data = this.getData(target);
 
-        if (data.content.startsWith("selector:")) {
-            const selector = data.content.replace("selector:", "").trim();
+        if (data.content.startsWith('selector:')) {
+            const selector = data.content.replace('selector:', '').trim();
             data.content = document.querySelector(selector)?.outerHTML ?? data.content;
         }
 
-        if (data.content.startsWith("lexicon:")) {
-            const lexicon = data.content.replace("lexicon:", "").trim();
+        if (data.content.startsWith('lexicon:')) {
+            const lexicon = data.content.replace('lexicon:', '').trim();
             data.content = Lexicon.get(lexicon);
         }
 
@@ -322,13 +322,13 @@ export class Tooltip {
         const dataset = target.dataset ?? {};
 
         return {
-            content: dataset.tooltipContent ?? "Content is missing!",
-            theme: dataset.tooltipTheme as TooltipTheme ?? "dark",
-            placement: dataset.tooltipPlacement as TooltipPlacement ?? "top",
-            animation: dataset.tooltipAnimation as TooltipAnimation ?? "scale",
-            interactive: dataset.tooltipInteractive === "true",
-            followCursor: dataset.tooltipFollowCursor === "true",
-            class: dataset.tooltipClass ?? "",
+            content: dataset.tooltipContent ?? 'Content is missing!',
+            theme: dataset.tooltipTheme as TooltipTheme ?? 'dark',
+            placement: dataset.tooltipPlacement as TooltipPlacement ?? 'top',
+            animation: dataset.tooltipAnimation as TooltipAnimation ?? 'scale',
+            interactive: dataset.tooltipInteractive === 'true',
+            followCursor: dataset.tooltipFollowCursor === 'true',
+            class: dataset.tooltipClass ?? '',
         };
     }
 }

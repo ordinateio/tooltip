@@ -1,4 +1,4 @@
-@use "../../src/Tooltip";
+@use '../../src/Tooltip';
 
 %grid {
   display: flex;
@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 14px "Arial";
+  font: 14px 'Arial';
   color: #efefee;
   text-transform: uppercase;
   user-select: none;
@@ -103,7 +103,7 @@ article {
       list-style: none;
 
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         top: 5px;
         right: 0;
@@ -116,7 +116,7 @@ article {
     ul li a {
       display: block;
       padding: 10px 20px;
-      font: 14px "Arial";
+      font: 14px 'Arial';
       color: #777777;
       text-decoration: none;
       transition: .3s color;
@@ -156,7 +156,7 @@ article {
           display: block;
           width: 300px;
           padding: 10px;
-          font: 14px "Arial";
+          font: 14px 'Arial';
           color: #777777;
           text-decoration: none;
           transition: .3s color;
@@ -207,7 +207,7 @@ article {
     width: 100%;
     height: 50px;
     padding: 0;
-    font: 14px "Arial";
+    font: 14px 'Arial';
     color: #efefee;
     text-align: center;
     text-transform: uppercase;
