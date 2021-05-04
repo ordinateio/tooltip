@@ -1,19 +1,19 @@
-const Path = require("path");
+const Path = require('path');
 
 const WPack = {
-    mode: "production",
-    devtool: "source-map",
+    mode: 'production',
+    devtool: 'source-map',
     performance: {
         hints: false,
     },
-    entry: Path.resolve(__dirname, "src/main.ts"),
+    entry: Path.resolve(__dirname, 'src/main.ts'),
     output: {
-        filename: "[name].js",
-        path: Path.resolve(__dirname, "dist/assets"),
+        filename: '[name].js',
+        path: Path.resolve(__dirname, 'dist/assets'),
     },
     cache: {
-        type: "filesystem",
-        cacheDirectory: Path.resolve(__dirname, ".cache"),
+        type: 'filesystem',
+        cacheDirectory: Path.resolve(__dirname, '.cache'),
     },
 };
 
@@ -23,8 +23,8 @@ WPack.optimization = {
         cacheGroups: {
             vendor: {
                 test: /[\\/]node_modules[\\/]/,
-                name: "vendor",
-                chunks: "all",
+                name: 'vendor',
+                chunks: 'all',
             },
         },
     },
@@ -34,20 +34,20 @@ WPack.module = {
     rules: [
         {
             test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-            type: "asset",
+            type: 'asset',
         },
         {
             test: /\.s?css$/,
             use: [
-                "style-loader",
+                'style-loader',
                 {
-                    loader: "css-loader",
+                    loader: 'css-loader',
                     options: {
                         sourceMap: false,
                     }
                 },
                 {
-                    loader: "postcss-loader",
+                    loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
                             plugins: {
@@ -57,15 +57,15 @@ WPack.module = {
                         },
                     },
                 },
-                "sass-loader",
+                'sass-loader',
             ],
         },
         {
             test: /\.ts$/,
             use: [{
-                loader: "ts-loader",
+                loader: 'ts-loader',
                 options: {
-                    configFile: "tsconfig.json",
+                    configFile: 'tsconfig.json',
                 },
             }],
         },
@@ -73,7 +73,7 @@ WPack.module = {
 };
 
 WPack.resolve = {
-    extensions: [".ts", ".js"],
+    extensions: ['.ts', '.js'],
 };
 
 module.exports = WPack;
