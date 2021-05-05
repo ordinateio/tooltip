@@ -1,6 +1,6 @@
 {
   "name": "@ordinateio/tooltip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Adaptation for Tippy.js.",
   "main": "dist/tooltip.js",
   "types": "dist/tooltip.d.ts",
