@@ -2,9 +2,9 @@
   "name": "@ordinateio/tooltip",
   "version": "1.0.1",
   "description": "Adaptation for Tippy.js.",
-  "main": "dist/tooltip.js",
-  "types": "dist/tooltip.d.ts",
-  "style": "dist/tooltip.css",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "style": "dist/index.css",
   "files": [
     "dist/**/*"
   ],
@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "build:all": "npm run build:clean && npm run build:dist && npm run build:demo",
-    "build:dist": "npx tsc --project tsconfig.json && npx sass --no-source-map src/tooltip.scss dist/tooltip.css",
+    "build:dist": "npx tsc --project tsconfig.json && npx sass --no-source-map src/index.scss dist/index.css",
     "build:demo": "npx webpack --config demo/webpack.config.js",
     "build:demo:watch": "npx webpack --watch --config demo/webpack.config.js",
     "build:demo:server": "npx live-server ./demo",

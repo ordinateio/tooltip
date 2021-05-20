@@ -1,7 +1,9 @@
-import './index.scss';
-
 import {Lexicon} from '@ordinateio/lexicon';
-import {Tooltip, TooltipInstance} from '../../src/Tooltip';
+
+import '../../src/index.scss';
+import {Tooltip, TooltipInstance} from '../../src';
+
+import './index.scss';
 
 Lexicon.extend({
     'test': {
