@@ -1,16 +1,6 @@
 import {Lexicon} from '@ordinateio/lexicon';
 import Tippy, {delegate, followCursor, Instance as TippyInstance, ReferenceElement} from 'tippy.js';
 
-export interface TooltipProperties {
-    content: string;
-    class: string;
-    theme: TooltipTheme;
-    placement: TooltipPlacement;
-    animation: TooltipAnimation;
-    interactive: boolean;
-    followCursor: boolean;
-}
-
 export interface TooltipCallbacks {
     /**
      * Lifecycle hook invoked before the tooltip properties have been updated.
@@ -78,6 +68,16 @@ export interface TooltipCallbacks {
     onMount?(instance: TooltipInstance): void;
 }
 
+export interface TooltipProperties {
+    content: string;
+    class: string;
+    theme: TooltipTheme;
+    placement: TooltipPlacement;
+    animation: TooltipAnimation;
+    interactive: boolean;
+    followCursor: boolean;
+}
+
 export interface TooltipSetProperties extends TooltipCallbacks {
     trigger: TooltipTrigger;
     target: string;
@@ -106,22 +106,14 @@ export type TooltipTrigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focu
 
 export type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
 
-/**
- * Helper class for initial Tippy.js setup.
- */
-class Init {
-    /**
-     * Reconfiguration prevention indicator.
-     *
-     * @private
-     */
-    private static initiated: boolean = false;
+export class Tooltip {
+    readonly lexicon: Lexicon;
 
     /**
-     * Basic setup.
+     * Tooltip constructor.
      */
-    static main(): void {
-        if (this.initiated) return;
+    constructor() {
+        this.lexicon = new Lexicon();
 
         Tippy.setDefaultProps({
             animation: 'scale',
@@ -135,47 +127,19 @@ class Init {
             offset: [0, 6],
             plugins: [followCursor]
         });
-
-        this.initiated = true;
     }
-}
 
-Init.main();
-
-/**
- * Adaptation for Tippy.js.
- *
- * @see set
- * @see getInstance
- * @see destroy
- * @see disable
- * @see enable
- * @see setContent
- * @see hide
- * @see show
- * @see unmount
- *
- * Tooltip:
- * [Github]{@link https://github.com/ordinateio/tooltip}
- *
- * Tippy.js:
- * [Github]{@link https://github.com/atomiks/tippyjs}
- * [Homepage]{@link https://atomiks.github.io/tippyjs/}
- */
-export class Tooltip {
     /**
      * Sets the tooltip handler to the target element.
      *
      * @param selector A container selector for setting a delegate.
      * @param properties
      */
-    static set(selector: string, properties: TooltipSetProperties): void {
+    set(selector: string, properties: TooltipSetProperties): void {
         delegate(selector, {
             ...properties,
-            ...{
-                onShow: this.setProperties.bind(this, properties.onShow),
-                touch: (properties.trigger === 'click') ? 'hold' : true,
-            }
+            onShow: this.setProperties.bind(this, properties.onShow),
+            touch: (properties.trigger === 'click') ? 'hold' : true,
         });
     }
 
@@ -184,7 +148,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    static getInstance(selector: string): TooltipInstance | undefined {
+    getInstance(selector: string): TooltipInstance | undefined {
         const element = document.querySelector(selector) as TooltipTarget | null;
 
         return element ? element._tippy : undefined;
@@ -195,7 +159,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    static destroy(selector: string): void {
+    destroy(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.destroy();
@@ -206,7 +170,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    static disable(selector: string): void {
+    disable(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.disable();
@@ -217,7 +181,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    static enable(selector: string): void {
+    enable(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.enable();
@@ -229,7 +193,7 @@ export class Tooltip {
      * @param selector
      * @param content
      */
-    static setContent(selector: string, content: string): void {
+    setContent(selector: string, content: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.setContent(content);
@@ -240,7 +204,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    static hide(selector: string): void {
+    hide(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.hide();
@@ -251,7 +215,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    static show(selector: string): void {
+    show(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.show();
@@ -262,7 +226,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    static unmount(selector: string): void {
+    unmount(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.unmount();
@@ -275,7 +239,7 @@ export class Tooltip {
      * @param instance
      * @private
      */
-    private static setProperties(onShow: TooltipOnShow, instance: TooltipInstance): void {
+    private setProperties(onShow: TooltipOnShow, instance: TooltipInstance): void {
         onShow && onShow(instance);
 
         const properties = this.getProperties(instance.reference);
@@ -296,8 +260,8 @@ export class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getProperties(target: TooltipTarget): TooltipProperties {
-        const data = this.getData(target);
+    private getProperties(target: TooltipTarget): TooltipProperties {
+        const data = Tooltip.getData(target);
 
         if (data.content.startsWith('selector:')) {
             const selector = data.content.replace('selector:', '').trim();
@@ -306,7 +270,7 @@ export class Tooltip {
 
         if (data.content.startsWith('lexicon:')) {
             const lexicon = data.content.replace('lexicon:', '').trim();
-            data.content = Lexicon.get(lexicon);
+            data.content = this.lexicon.get(lexicon);
         }
 
         return data;
@@ -323,9 +287,9 @@ export class Tooltip {
 
         return {
             content: dataset.tooltipContent ?? 'Content is missing!',
-            theme: dataset.tooltipTheme as TooltipTheme ?? 'dark',
-            placement: dataset.tooltipPlacement as TooltipPlacement ?? 'top',
-            animation: dataset.tooltipAnimation as TooltipAnimation ?? 'scale',
+            theme: (dataset.tooltipTheme ?? 'dark') as TooltipTheme,
+            placement: (dataset.tooltipPlacement ?? 'top') as TooltipPlacement,
+            animation: (dataset.tooltipAnimation ?? 'scale') as TooltipAnimation,
             interactive: dataset.tooltipInteractive === 'true',
             followCursor: dataset.tooltipFollowCursor === 'true',
             class: dataset.tooltipClass ?? '',

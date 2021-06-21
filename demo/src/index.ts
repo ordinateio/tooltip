@@ -1,11 +1,10 @@
-import {Lexicon} from '@ordinateio/lexicon';
-
 import '../../src/index.scss';
 import {Tooltip, TooltipInstance} from '../../src';
 
 import './index.scss';
 
-Lexicon.extend({
+const tooltip = new Tooltip();
+tooltip.lexicon.extend({
     'test': {
         en: 'Lexicon!',
         ru: 'Лексикон!',
@@ -13,7 +12,7 @@ Lexicon.extend({
 });
 
 /* Nav. */
-Tooltip.set('.nav-container', {
+tooltip.set('.nav-container', {
     trigger: 'click',
     target: '.nav-container__button',
     onShow(instance: TooltipInstance) {
@@ -25,31 +24,31 @@ Tooltip.set('.nav-container', {
 });
 
 /* Placements. */
-Tooltip.set('.placement', {
+tooltip.set('.placement', {
     trigger: 'mouseenter',
     target: '.placement__item',
 });
 
 /* Other. */
-Tooltip.set('.other', {
+tooltip.set('.other', {
     trigger: 'click',
     target: '.other__item--click',
 });
 
-Tooltip.set('.other', {
+tooltip.set('.other', {
     trigger: 'mouseenter',
     target: '.other__item--mouseenter',
 });
 
-Tooltip.set('.other', {
+tooltip.set('.other', {
     trigger: 'focus',
     target: '.other__item--focus input',
 });
 
-Tooltip.set('.other', {
+tooltip.set('.other', {
     trigger: 'click',
     target: '.other__item--toggle-lang',
     onShow(instance: TooltipInstance) {
-        Lexicon.locale = instance.reference.getAttribute('data-value') ?? 'en';
+        tooltip.lexicon.locale = instance.reference.getAttribute('data-value') ?? 'en';
     },
 });
