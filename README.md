@@ -1,6 +1,6 @@
 # Tooltip
 
-Adaptation for Tippy.js.
+The implementation of simple tooltips.
 
 ## Installation
 
