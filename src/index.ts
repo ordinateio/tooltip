@@ -106,6 +106,12 @@ export type TooltipTrigger = 'mouseenter' | 'focus' | 'mouseenter focus' | 'focu
 
 export type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
 
+/**
+ * The implementation of simple tooltips.
+ *
+ * Tooltip:
+ * [Github]{@link https://github.com/ordinateio/tooltip}
+ */
 export class Tooltip {
     readonly lexicon: Lexicon;
 
