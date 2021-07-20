@@ -69,17 +69,58 @@ export interface TooltipCallbacks {
 }
 
 export interface TooltipProperties {
+    /**
+     * An instance of the Lexicon.
+     */
+    lexicon: Lexicon;
+}
+
+export interface TooltipAttributes {
+    /**
+     * Tooltip content.
+     */
     content: string;
+
+    /**
+     * Additional CSS classes separated by a space.
+     */
     class: string;
+
+    /**
+     * Theme for tooltip.
+     */
     theme: TooltipTheme;
+
+    /**
+     * Position of the tooltip.
+     */
     placement: TooltipPlacement;
+
+    /**
+     * Tooltip animation.
+     */
     animation: TooltipAnimation;
+
+    /**
+     * If 'true' interactive mode will be enabled.
+     */
     interactive: boolean;
+
+    /**
+     * If 'true' will enable cursor following.
+     */
     followCursor: boolean;
 }
 
-export interface TooltipSetProperties extends TooltipCallbacks {
+export interface TooltipPropertiesForSet extends TooltipCallbacks {
+    /**
+     * Event to display the tooltip.
+     */
     trigger: TooltipTrigger;
+
+    /**
+     * Target item.
+     */
     target: string;
 }
 
@@ -112,16 +153,34 @@ export type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
  * [Github]{@link https://github.com/ordinateio/tooltip}
  */
 export class Tooltip {
+    private readonly properties: TooltipProperties = {
+        lexicon: new Lexicon(),
+    };
+
     /**
-     * An instance of the Lexicon class.
+     * An instance of the Lexicon.
      */
-    public lexicon: Lexicon;
+    public get lexicon(): Lexicon {
+        return this.properties.lexicon;
+    }
+
+    /**
+     * An instance of the Lexicon.
+     *
+     * @param lexicon An instance of the Lexicon.
+     */
+    public set lexicon(lexicon: Lexicon) {
+        this.properties.lexicon = lexicon;
+    }
 
     /**
      * Tooltip constructor.
      */
-    public constructor(lexicon?: Lexicon) {
-        this.lexicon = lexicon ? lexicon : new Lexicon();
+    public constructor(properties: Partial<TooltipProperties> = {}) {
+        this.properties = {
+            ...this.properties,
+            ...properties,
+        };
 
         Tippy.setDefaultProps({
             animation: 'scale',
@@ -143,7 +202,7 @@ export class Tooltip {
      * @param selector A container selector for setting a delegate.
      * @param properties
      */
-    public set(selector: string, properties: TooltipSetProperties): void {
+    public set(selector: string, properties: TooltipPropertiesForSet): void {
         delegate(selector, {
             ...properties,
             onShow: this.setProperties.bind(this, properties.onShow),
@@ -250,7 +309,7 @@ export class Tooltip {
     private setProperties(onShow: TooltipOnShow, instance: TooltipInstance): void {
         onShow && onShow(instance);
 
-        const properties = this.getProperties(instance.reference);
+        const properties = this.getAttributes(instance.reference);
         const popper = instance.popper;
 
         popper.classList.add('tooltip-root');
@@ -268,8 +327,8 @@ export class Tooltip {
      * @param target Target item.
      * @private
      */
-    private getProperties(target: TooltipTarget): TooltipProperties {
-        const data = Tooltip.getData(target);
+    private getAttributes(target: TooltipTarget): TooltipAttributes {
+        const data = Tooltip.getRawAttributes(target);
 
         if (data.content.startsWith('selector:')) {
             const selector = data.content.replace('selector:', '').trim();
@@ -278,7 +337,7 @@ export class Tooltip {
 
         if (data.content.startsWith('lexicon:')) {
             const lexicon = data.content.replace('lexicon:', '').trim();
-            data.content = this.lexicon.get(lexicon);
+            data.content = this.properties.lexicon.get(lexicon);
         }
 
         return data;
@@ -290,7 +349,7 @@ export class Tooltip {
      * @param target Target item.
      * @private
      */
-    private static getData(target: TooltipTarget): TooltipProperties {
+    private static getRawAttributes(target: TooltipTarget): TooltipAttributes {
         const dataset = target.dataset ?? {};
 
         return {
