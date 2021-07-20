@@ -113,7 +113,7 @@ export type TooltipOnShow = ((instance: TooltipInstance) => void) | undefined;
  * [Github]{@link https://github.com/ordinateio/tooltip}
  */
 export class Tooltip {
-    readonly lexicon: Lexicon;
+    lexicon: Lexicon;
 
     /**
      * Tooltip constructor.
