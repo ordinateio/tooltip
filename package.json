@@ -38,9 +38,9 @@
     "npm:update-lock-file": "npm install --package-lock-only"
   },
   "devDependencies": {
-    "@types/node": "^15",
+    "@types/node": "^16",
     "autoprefixer": "^10",
-    "css-loader": "^5",
+    "css-loader": "^6",
     "cssnano": "^5",
     "live-server": "^1",
     "npm-run-all": "^4",
@@ -48,7 +48,7 @@
     "rimraf": "^3",
     "sass": "^1",
     "sass-loader": "^12",
-    "style-loader": "^2",
+    "style-loader": "^3",
     "ts-loader": "^9",
     "typescript": "^4",
     "webpack": "^5",
