@@ -24,18 +24,22 @@
     "typescript"
   ],
   "scripts": {
-    "build:all": "run-s clean:all build:{dist,dev}",
+    "build": "npm run clean && npm run build:dist && npm run build:dev",
+    "build:dist": "tsc --project tsconfig.json && sass --no-source-map src/index.scss dist/index.css",
     "build:dev": "webpack --config demo/webpack.dev.js",
     "build:dev:watch": "webpack --watch --config demo/webpack.dev.js",
     "build:dev:serve": "live-server ./demo",
-    "build:dist": "tsc --project tsconfig.json && sass --no-source-map src/index.scss dist/index.css",
-    "clean:all": "run-s clean:{cache,dist,demo}",
+    "clean": "rimraf .cache dist demo/dist",
     "clean:cache": "rimraf .cache",
     "clean:dist": "rimraf dist",
     "clean:demo": "rimraf demo/dist",
-    "npm:pack": "run-s clean:{cache,dist} build:dist && npm pack",
-    "npm:publish": "run-s clean:{cache,dist} build:dist && npm publish --access public",
-    "npm:update-lock-file": "npm install --package-lock-only"
+    "pack": "run-s clean:{cache,dist} build:dist && npm pack",
+    "publish": "run-s clean:{cache,dist} build:dist && npm publish --access public",
+    "update-lock-file": "npm install --package-lock-only",
+    "install": "npm install",
+    "install:lock:only": "npm install --package-lock-only",
+    "outdated": "npm outdated",
+    "update": "npm update"
   },
   "devDependencies": {
     "@types/node": "^16",
