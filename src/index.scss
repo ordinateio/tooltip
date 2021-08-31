@@ -6,21 +6,21 @@
 @use '../node_modules/tippy.js/animations/perspective.css';
 
 .tooltip-root {
-  .tooltip-container {
-    &[data-theme] {
-      box-shadow: 0 0 10px rgba(#000, .2);
-    }
+    .tooltip-container {
+        &[data-theme] {
+            box-shadow: 0 0 10px rgba(#000, .2);
+        }
 
-    &__content {
-      font: 13px 'Arial';
-      padding: 8px 15px;
-      user-select: none;
-    }
+        &__content {
+            font: 13px 'Arial';
+            padding: 8px 15px;
+            user-select: none;
+        }
 
-    &__arrow {
-      &::before {
-        transform: scale(.8);
-      }
+        &__arrow {
+            &::before {
+                transform: scale(.8);
+            }
+        }
     }
-  }
 }
