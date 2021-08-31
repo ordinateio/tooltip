@@ -160,7 +160,7 @@ export class Tooltip {
     /**
      * An instance of the Lexicon.
      */
-    public get lexicon(): Lexicon {
+    get lexicon(): Lexicon {
         return this.properties.lexicon;
     }
 
@@ -169,18 +169,19 @@ export class Tooltip {
      *
      * @param lexicon An instance of the Lexicon.
      */
-    public set lexicon(lexicon: Lexicon) {
+    set lexicon(lexicon: Lexicon) {
         this.properties.lexicon = lexicon;
     }
 
     /**
      * Tooltip constructor.
      */
-    public constructor(properties: Partial<TooltipProperties> = {}) {
+    constructor(properties: Partial<TooltipProperties> = {}) {
         this.properties = {
             ...this.properties,
             ...properties,
         };
+
 
         Tippy.setDefaultProps({
             animation: 'scale',
@@ -202,7 +203,7 @@ export class Tooltip {
      * @param selector A container selector for setting a delegate.
      * @param properties
      */
-    public set(selector: string, properties: TooltipPropertiesForSet): void {
+    set(selector: string, properties: TooltipPropertiesForSet): void {
         delegate(selector, {
             ...properties,
             onShow: this.setProperties.bind(this, properties.onShow),
@@ -215,7 +216,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public getInstance(selector: string): TooltipInstance | undefined {
+    getInstance(selector: string): TooltipInstance | undefined {
         const element = document.querySelector(selector) as TooltipTarget | null;
 
         return element ? element._tippy : undefined;
@@ -226,7 +227,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public destroy(selector: string): void {
+    destroy(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.destroy();
@@ -237,7 +238,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public disable(selector: string): void {
+    disable(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.disable();
@@ -248,7 +249,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public enable(selector: string): void {
+    enable(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.enable();
@@ -260,7 +261,7 @@ export class Tooltip {
      * @param selector
      * @param content
      */
-    public setContent(selector: string, content: string): void {
+    setContent(selector: string, content: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.setContent(content);
@@ -271,7 +272,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public hide(selector: string): void {
+    hide(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.hide();
@@ -282,7 +283,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public show(selector: string): void {
+    show(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.show();
@@ -293,7 +294,7 @@ export class Tooltip {
      *
      * @param selector
      */
-    public unmount(selector: string): void {
+    unmount(selector: string): void {
         const instance = this.getInstance(selector);
 
         instance && instance.unmount();
