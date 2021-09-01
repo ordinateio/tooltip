@@ -1,11 +1,11 @@
-const Path = require('path');
+let Path = require('path');
 
-const assetsConfig = {
+let assetsConfig = {
     test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
     type: 'asset',
 };
 
-const sassConfig = {
+let sassConfig = {
     test: /\.s?css$/,
     use: [
         'style-loader',
@@ -30,7 +30,7 @@ const sassConfig = {
     ],
 };
 
-const typescriptConfig = {
+let typescriptConfig = {
     test: /\.ts$/,
     use: [{
         loader: 'ts-loader',
@@ -40,11 +40,10 @@ const typescriptConfig = {
     }],
 };
 
-const webpackConfig = {
+let webpackConfig = {
     performance: {
         hints: false,
     },
-    stats: 'minimal',
     entry: Path.resolve(__dirname, 'src/index.ts'),
     output: {
         filename: '[name].js',
