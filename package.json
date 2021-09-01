@@ -41,7 +41,7 @@
     "npm:update": "npm update"
   },
   "devDependencies": {
-    "@types/node": "^16",
+    "@types/node": "^16.7.10",
     "autoprefixer": "^10",
     "css-loader": "^6",
     "cssnano": "^5",
