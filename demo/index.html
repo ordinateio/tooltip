@@ -9,14 +9,7 @@
 <article>
     <div class="content">
         <div class="nav-container">
-            <div class="nav-container__button"
-                 data-tooltip-content="selector:.nav-container__nav"
-                 data-tooltip-class="nav-container__tooltip-nav"
-                 data-tooltip-theme="light"
-                 data-tooltip-placement="bottom"
-                 data-tooltip-interactive="true"
-                 data-tooltip-animation="shift-away">Nav
-            </div>
+            <div class="nav-container__button" data-tooltip-content="selector:.nav-container__nav">Nav</div>
             <div class="nav-container__nav">
                 <ul>
                     <li><a href="/" title="">First item</a></li>
@@ -29,87 +22,71 @@
         </div>
 
         <div class="placement">
-            <div class="placement__item"
-                 data-tooltip-content="Top-Start!"
-                 data-tooltip-placement="top-start">Top-Start
+            <div class="placement__item placement__item--top-start" data-tooltip-content="Top-Start!">
+                Top-Start
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Top!"
-                 data-tooltip-placement="top">Top
+            <div class="placement__item placement__item--top" data-tooltip-content="Top!">
+                Top
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Top-End!"
-                 data-tooltip-placement="top-end">Top-End
+            <div class="placement__item placement__item--top-end" data-tooltip-content="Top-End!">
+                Top-End
             </div>
 
-            <div class="placement__item"
-                 data-tooltip-content="Right-Start!"
-                 data-tooltip-placement="right-start">Right-Start
+            <div class="placement__item placement__item--right-start" data-tooltip-content="Right-Start!">
+                Right-Start
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Right!"
-                 data-tooltip-placement="right">Right
+            <div class="placement__item placement__item--right" data-tooltip-content="Right!">
+                Right
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Right-End!"
-                 data-tooltip-placement="right-end">Right-End
+            <div class="placement__item placement__item--right-end" data-tooltip-content="Right-End!">
+                Right-End
             </div>
 
-            <div class="placement__item"
-                 data-tooltip-content="Bottom-Start!"
-                 data-tooltip-placement="bottom-start">Bottom-Start
+            <div class="placement__item placement__item--bottom-start" data-tooltip-content="Bottom-Start!">
+                Bottom-Start
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Bottom!"
-                 data-tooltip-placement="bottom">Bottom
+            <div class="placement__item placement__item--bottom" data-tooltip-content="Bottom!">
+                Bottom
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Bottom-End!"
-                 data-tooltip-placement="bottom-end">Bottom-End
+            <div class="placement__item placement__item--bottom-end" data-tooltip-content="Bottom-End!">
+                Bottom-End
             </div>
 
-            <div class="placement__item"
-                 data-tooltip-content="Left-Start!"
-                 data-tooltip-placement="left-start">Left-Start
+            <div class="placement__item placement__item--left-start" data-tooltip-content="Left-Start!">
+                Left-Start
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Left!"
-                 data-tooltip-placement="left">Left
+            <div class="placement__item placement__item--left" data-tooltip-content="Left!">
+                Left
             </div>
-            <div class="placement__item"
-                 data-tooltip-content="Left-End!"
-                 data-tooltip-placement="left-end">Left-End
+            <div class="placement__item placement__item--left-end" data-tooltip-content="Left-End!">
+                Left-End
             </div>
         </div>
 
-        <div class="other">
-            <div class="other__item other__item--click"
-                 data-tooltip-content="Click!"
-                 data-tooltip-interactive="true"
-                 data-tooltip-class="custom-class">Click
+        <div class="events">
+            <div class="events__item events__item--click" data-tooltip-content="Click!">
+                Click
             </div>
-            <div class="other__item other__item--mouseenter"
-                 data-tooltip-content="Mouseenter!">Mouseenter
+            <div class="events__item events__item--mouseenter" data-tooltip-content="Mouseenter!">
+                Mouseenter
             </div>
-            <div class="other__item other__item--focus">
-                <input type="text"
-                       data-tooltip-content="Focus!"
-                       placeholder="Focus">
+            <div class="events__item events__item--focus">
+                <input type="text" data-tooltip-content="Focus!" placeholder="Focus">
             </div>
-            <div class="other__item other__item--mouseenter"
-                 data-tooltip-content="Follow!"
-                 data-tooltip-theme="light"
-                 data-tooltip-follow-cursor="true">Follow
+            <div class="events__item events__item--follow" data-tooltip-content="Follow!">
+                Follow
             </div>
-            <div class="other__item other__item--toggle-lang"
-                 data-value="en"
-                 data-tooltip-content="lexicon:test"
-                 data-tooltip-interactive="true">"en"
+        </div>
+
+        <div class="methods">
+            <div class="methods__item methods__item--destroy-click">
+                Destroy Click
             </div>
-            <div class="other__item other__item--toggle-lang"
-                 data-value="ru"
-                 data-tooltip-content="lexicon:test"
-                 data-tooltip-interactive="true">"ru"
+            <div class="methods__item methods__item--disable-mouseenter">
+                Disable Mouseenter
+            </div>
+            <div class="methods__item methods__item--enable-mouseenter">
+                Enable Mouseenter
             </div>
         </div>
     </div>

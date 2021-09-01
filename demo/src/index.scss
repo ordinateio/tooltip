@@ -14,7 +14,6 @@
     justify-content: center;
     font: 14px 'Arial';
     color: #efefee;
-    text-transform: uppercase;
     user-select: none;
     cursor: pointer;
 
@@ -69,7 +68,7 @@ article {
     }
 }
 
-/* Nav. */
+/* Nav */
 .nav-container {
     display: flex;
     align-items: center;
@@ -100,13 +99,23 @@ article {
             position: relative;
             list-style: none;
 
+            &:nth-last-child(1) {
+                &::before {
+                    display: none;
+                }
+
+                a {
+                    padding-right: 0;
+                }
+            }
+
             &:before {
                 content: '';
                 position: absolute;
-                top: 5px;
+                top: 8px;
                 right: 0;
                 width: 1px;
-                height: calc(100% - 10px);
+                height: calc(100% - 16px);
                 background: #cccccc;
             }
         }
@@ -152,7 +161,7 @@ article {
 
                 ul li a {
                     display: block;
-                    width: 300px;
+                    width: 200px;
                     padding: 10px;
                     font: 14px 'Arial';
                     color: #777777;
@@ -181,7 +190,7 @@ article {
     }
 }
 
-/* Placement. */
+/* Placement */
 .placement {
     @extend %grid;
     margin: 0 0 15px;
@@ -192,13 +201,15 @@ article {
     }
 }
 
-/* Events. */
-.other {
+/* Events */
+.events {
     @extend %grid;
+    margin: 0 0 15px;
 
     &__item {
         @extend %button;
-        @include background(#00796b);
+        width: 24%;
+        @include background(#d32f2f);
     }
 
     input {
@@ -217,5 +228,16 @@ article {
         &::placeholder {
             color: inherit;
         }
+    }
+}
+
+/* Methods */
+.methods {
+    @extend %grid;
+
+    &__item {
+        @extend %button;
+        width: 32.3%;
+        @include background(#d32f2f);
     }
 }
