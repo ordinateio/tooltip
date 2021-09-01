@@ -58,7 +58,6 @@
     "webpack-merge": "^5"
   },
   "dependencies": {
-    "@ordinateio/lexicon": "^2",
     "tippy.js": "^6"
   }
 }
