@@ -11,13 +11,14 @@ npm install --save-dev @ordinateio/tooltip
 ## Usage
 
 ```ts
-import {Tooltip} from "@ordinateio/tooltip";
 import "@ordinateio/tooltip/dist/tooltip.css";
+import {Tooltip} from "@ordinateio/tooltip";
 
-const tooltip = new Tooltip();
+let tooltip = new Tooltip();
 
-tooltip.set('.container', {
+tooltip.create('.container', {
     trigger: 'click',
     target: '.button',
+    content: 'attribute:data-tooltip-content',
 });
 ```
