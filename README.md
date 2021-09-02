@@ -11,7 +11,7 @@ npm install --save-dev @ordinateio/tooltip
 ## Usage
 
 ```ts
-import '@ordinateio/tooltip/dist/tooltip.css';
+import '@ordinateio/tooltip/dist/index.css';
 import {Tooltip} from '@ordinateio/tooltip';
 
 let tooltip = new Tooltip();
