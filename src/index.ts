@@ -167,7 +167,7 @@ export class Tooltip {
      * @param instance
      * @private
      */
-    private static setContentFromAttribute(properties: TooltipProperties, instance: TooltipInstance) {
+    private static setContentFromAttribute(properties: TooltipProperties, instance: TooltipInstance): void {
         if (properties.content.startsWith('attribute:')) {
             let selector = properties.content.replace('attribute:', '').trim();
             properties.content = instance.reference.getAttribute(selector) ?? properties.content;
@@ -180,7 +180,7 @@ export class Tooltip {
      * @param properties
      * @private
      */
-    private static setContentFromSelector(properties: TooltipProperties) {
+    private static setContentFromSelector(properties: TooltipProperties): void {
         if (properties.content.startsWith('selector:')) {
             let selector = properties.content.replace('selector:', '').trim();
             properties.content = document.querySelector(selector)?.outerHTML ?? properties.content;
@@ -194,7 +194,7 @@ export class Tooltip {
      * @param instance
      * @private
      */
-    private static setClasses(properties: TooltipProperties, instance: TooltipInstance) {
+    private static setClasses(properties: TooltipProperties, instance: TooltipInstance): void {
         let popper = instance.popper;
 
         popper.classList.add('tooltip-root');
