@@ -35,7 +35,7 @@
     "npm:install:lock:only": "npm install --package-lock-only"
   },
   "devDependencies": {
-    "@types/node": "^16.7.10",
+    "@types/node": "^16",
     "autoprefixer": "^10",
     "css-loader": "^6",
     "cssnano": "^5",
