@@ -1,6 +1,6 @@
 {
   "name": "@ordinateio/tooltip",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "The implementation of simple tooltips.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
