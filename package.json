@@ -30,15 +30,9 @@
     "build:dev:watch": "webpack --watch --config demo/webpack.dev.js",
     "build:dev:serve": "live-server ./demo",
     "clean": "rimraf .cache dist demo/dist",
-    "clean:cache": "rimraf .cache",
-    "clean:dist": "rimraf dist",
-    "clean:demo": "rimraf demo/dist",
-    "npm:pack": "npm run clean:cache && npm run clean dist && npm run build:dist && npm pack",
-    "npm:publish": "npm run clean:cache && npm run clean dist && npm run build:dist && npm publish --access public",
-    "npm:install": "npm install",
-    "npm:install:lock:only": "npm install --package-lock-only",
-    "npm:outdated": "npm outdated",
-    "npm:update": "npm update"
+    "npm:pack": "npm run build && npm pack",
+    "npm:publish": "npm run build && npm publish --access public",
+    "npm:install:lock:only": "npm install --package-lock-only"
   },
   "devDependencies": {
     "@types/node": "^16.7.10",
