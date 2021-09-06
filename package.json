@@ -24,8 +24,7 @@
     "typescript"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build:dist && npm run build:dev",
-    "build:dist": "tsc --project tsconfig.json && sass --no-source-map src/index.scss dist/index.css",
+    "build": "tsc --project tsconfig.json && sass --no-source-map src/index.scss dist/index.css && npx copyfiles -u 1 src/assets/** dist",
     "build:dev": "webpack --config demo/webpack.dev.js",
     "build:dev:watch": "webpack --watch --config demo/webpack.dev.js",
     "build:dev:serve": "live-server ./demo",
